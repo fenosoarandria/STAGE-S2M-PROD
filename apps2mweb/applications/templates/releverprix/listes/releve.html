@@ -1,0 +1,599 @@
+{% load static %}
+<div id="content" class="main-content">
+    <div class="container-fluid">
+        <!-- En-tête de la page -->
+        <div class="header text-center">
+            <h3>LISTE RELEVÉ</h3>
+        </div>
+        
+        <!-- Section des filtres et des boutons -->
+        <div class="box mb-4">
+            <div class="form-inline">
+                
+                <!-- Bouton pour ouvrir le modal "Nouveau relevé" -->
+                <button class="btn-advanced" data-toggle="modal" data-target="#nouveauReleveModal" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau relevé">
+                    <i class="flaticon-plus"></i>
+                </button> 
+                
+             
+                
+                <!-- Debut filtres de date et de sélection -->
+                <form id="filter-form" class="form-inline" method="post">
+                    {% csrf_token %}
+
+                        <label for="startDate">Date début :</label>
+                        <input type="date" id="date-debut"  class="date-debut form-control form-control-sm">
+                        
+                        <label for="endDate">Date fin :</label>
+                        <input type="date" id="date-fin"  class="date-fin form-control form-control-sm">
+                        
+                        <label for="select">Concurrent :</label>
+                        <select class="selectpicker form-control custom-select"   id="concurrent" data-live-search="true" data-size="4">
+                            <option value="">Choisir</option>
+                            {% for e in enseigne %}
+                                <option value="{{e.enseigne_ens}}">{{e.enseigne_ens}} - {{e.libelle_ens}}</option>
+                            {% endfor %}
+                            
+                        </select>
+
+                        <!-- Boutons pour lancer une action et importer un relevé -->
+                        <button type="button" class="btn-advanced" onClick="applyFiltersReleveIndex()" >Filtre</button>
+                        
+                    </form>
+
+                        <!-- Champ de recherche -->
+                        <div class="search-container">
+                            <input type="text" id="searchInput"  class="form-control form-control-sm" placeholder="Recherche">
+                            <i class="flaticon-search search-icon"></i>
+                        </div>
+
+                        <!-- Bouton pour ouvrir le modal "Nouveau relevé" -->
+                        <button class="btn-advanced" data-toggle="modal" onClick="Releve();" data-target="#importReleveModal" data-toggle="tooltip" data-placement="top" title="Importer relevé">
+                            <i class="flaticon-download"></i>
+                        </button> 
+
+                    <!-- Fin filtres de date et de sélection -->
+                </div>
+            </div>
+
+            <!-- Tableau des relevés avec pagination -->
+        <div class="box" >
+            <div class="btn-container">
+                <button onclick="exportListeReleve()" class="export-btn export-btn-excel">
+                    <i class="fas fa-file-excel"></i>
+                </button> 
+                <button onclick="generatePdfFilterReleve()" class="export-btn export-btn-pdf">
+                    <i class="fas fa-file-pdf"></i>
+                </button>  
+            </div>          
+            <br>
+            
+            <div class="table-responsive mb-4">
+
+                <table class="table table-striped table-bordered table-hover" id="table-releve">
+                    <thead>
+                        <tr>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">N° relevé</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Concurent</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Zone relevé</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Nom relevé</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Date création</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Autre info</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Date maj</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Nombre article</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Etat</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">Paramètre</th>
+                        </tr>
+                    </thead>
+                    <tbody id="releve">
+                        
+                    </tbody>
+                    <!-- Conteneur où vous voulez placer le spinner -->
+                </table>                          
+            </div>
+            <!-- Loading {% endcomment -->
+            <div id="loading_releve" class="loading-spinner-wrapper" style="display: none;">
+                <div class="loading-spinner"></div>
+            </div>
+
+
+            <!-- Pagination pour la liste principale -->
+            <nav id="pagination-releve" aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" id="prev-page-main"><a class="page-link" href="#">Précédente</a></li>
+                    <li class="page-item" id="next-page-main"><a class="page-link" href="#">Suivante</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nouveau Relevé -->
+<div class="modal fade" id="nouveauReleveModal" tabindex="-1" role="dialog" aria-labelledby="nouveauReleveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nouveauReleveModalLabel">Nouveau relevé</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="dateInsertion">Date insertion :</label>
+                        <input type="date" name="date_creation" class="form-control" value="{% now 'Y-m-d' %}" id="dateInsertion">
+                    </div>
+                    <div class="form-group">
+                        <label for="ensrel">Enseigne</label>
+                        <select class="selectpicker form-control" name="enseigne" id="enseigne" data-live-search="true" data-size="4" required>
+                            <option value="">----Veuillez choisir un enseigne----</option>
+                            {% for e in enseigne %}
+                                <option value="{{e.enseigne_ens }}">{{e.enseigne_ens }} - {{ e.libelle_ens }}</option>
+                            {% endfor %}
+                        </select>
+                        <div id="errormsg-enseigne"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zone">Zone</label>
+                        <select class="selectpicker form-control" name="zone" id="zone" data-live-search="true" data-size="4" required>
+                            <option value="">----Veuillez choisir un zone----</option>
+                            {% for z in zone %}
+                                <option value="{{z.zone_zn }}">{{z.zone_zn }} - {{ z.libelle_zn }}</option>
+                            {% endfor %}
+                        </select>
+                        <div id="errormsg-zone"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomReleve">Nom relevé :</label>
+                        <input type="text" name="nom_releve" class="form-control" id="nomReleve" placeholder="Veuillez choisir le nom du relevé" required>
+                        <div id="errormsg-nom_releve"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="autreInfo">Autre information :</label>
+                        <input type="text" name="autre_info" class="form-control" id="autreInfo" placeholder="Autre information">
+                        <div id="errormsg-autre_info"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" onClick="InsertReleve()">Sauvegarder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Import Relevé -->
+<div class="modal fade" id="importReleveModal" tabindex="-1" role="dialog" aria-labelledby="importReleveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document"> <!-- Utilisation de la classe modal-lg pour agrandir le modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importReleveModalLabel">Import exel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Champ de recherche dans le modal -->
+                <div class="form-inline">
+                    <div></div>
+                    <div class="search-container">
+                        <input type="text" id="searchImportInput" class="form-control form-control-sm" id="searchInput" placeholder="Recherche">
+                        <i class="flaticon-search search-icon"></i>
+                    </div>
+                </div>
+                <br>
+                
+                <div class="box">
+                <div class="btn-container">
+                    <button onclick="exportSelectedReleve()" class="export-btn export-btn-excel">
+                        <i class="fas fa-file-excel"></i>
+                    </button>   
+                    <button onclick="generatePdfReleveModal()" class="export-btn export-btn-pdf">
+                        <i class="fas fa-file-pdf"></i>
+                    </button>          
+                </div>
+                    <br>
+                    <div class="table-responsive mb-4"> <!-- Ajusté le padding-bottom -->
+                        <table class="table table-striped table-bordered table-hover" id="table-modal-import-releve">
+                            <thead>
+                                <tr>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">N°</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Libellé</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Enseigne</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Création</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Choisir export</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    
+                    <!-- Pagination pour le modal d'importation -->
+                    <nav id="pagination-modal-import-releve" aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" id="prev-page-import"><a class="page-link" href="#">Précédente</a></li>
+                            <li class="page-item" id="next-page-import"><a class="page-link" href="#">Suivante</a></li>
+                        </ul>
+                    </nav>
+                    <div class="form-group">
+                        <label for="file-input">Choisir un fichier :</label>
+                        <input type="file" name="" class="form-control" >
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                {% comment %} <button type="button" class="btn btn-primary">Importer</button> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal de confirmation de suppression -->
+<div class="modal fade" id="deleteReleveModal" tabindex="-1" role="dialog" aria-labelledby="deleteReleveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteReleveModalLabel">Confirmer la suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cet élément ?
+            </div>
+            <div class="modal-footer">
+                <form id="deleteReleveForm" method="post">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" onClick="setupDeleteReleve()">Oui, supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Detail Relevé -->
+<div class="modal fade" id="detailReleveModal" tabindex="-1" role="dialog" aria-labelledby="detailReleveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " id="custom-modal-detail-size" role="document"> <!-- Utilisation de la classe modal-lg pour agrandir le modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailReleveModalLabel">Detail Relevé</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Champ de recherche dans le modal -->
+                <center><b id="libelle"></b></center>
+                
+                <div class="form-inline">                    
+                    <!-- Bouton pour ouvrir le modal "Nouveau relevé" -->
+                    <button class="btn-advanced" id="import_releve" data-toggle="modal" data-target="#nouveauArticleModal" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau article">
+                        <i class="flaticon-plus"></i>
+                        Releve S2M
+                    </button> 
+                      
+                    <div></div>
+                    {% comment %} <button class="btn-advanced" data-placement="left" title="Export exel article">Exel</button>  {% endcomment %}
+                        <button class="btn-advanced aligned" id="import_conc" data-toggle="modal" data-target="#nouveauArticleConcurrentModal" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau article concurrent">
+                            <i class="flaticon-plus"></i>
+                            Concurrent
+                        </button>
+                    
+                    <div class="search-container">
+                        <input type="text" id="searchDetailReleveInput" class="form-control form-control-sm" placeholder="Recherche">
+                        <i class="flaticon-search search-icon"></i>
+                    </div>
+                    
+                    
+                    
+                </div>
+                <br>
+                
+                <div class="box">
+                    <div class="btn-container">
+                        <button onclick="exportArticleReleve()" class="export-btn export-btn-excel">
+                            <i class="fas fa-file-excel"></i>
+                        </button>            
+                    </div>
+                    <br>
+
+                    <div class="table-responsive mb-4"> <!-- Ajusté le padding-bottom -->
+                        <table class="table table-striped table-bordered table-hover" id="table-detail-releve">
+                            <thead>
+                                <tr>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Référence article S2M</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Libellé S2M</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Gencode S2M	</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Prix référence</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Prix zone</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Libellé concurrent	</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Gencode concurrent</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Prix concurrent</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Commentaire</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Etat relevé</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Etat article</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination pour le modal d'importation -->
+                    <nav id="pagination-detail-releve" aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" id="prev-page-import"><a class="page-link" href="#">Précédente</a></li>
+                            <li class="page-item" id="next-page-import"><a class="page-link" href="#">Suivante</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="validationreleve" onClick="ValidationReleve()">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal modifier detail Relevé -->
+<div class="modal fade" id="modifierDetailReleveModal" tabindex="-1" role="dialog" aria-labelledby="modifierDetailReleveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="custom-modal-detail-modif-size" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modifierDetailReleveModalLabel">Information par article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="dateInput">Date:</label>
+                    <input type="date" class="form-control form-control-sm" id="dateInput" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="releveNumberInput">N° relevé:</label>
+                    <input type="text" class="form-control form-control-sm" id="releveNumberInput" readonly>
+                </div>
+
+                <div id="modal-body-detail">
+                    <!-- Boîte S2M -->
+                    <div class="box-container-detail s2m-box">
+                        <div class="box-header">
+                            <h5>S2M</h5>
+                        </div>
+                        <input type="hidden" class="form-control form-control-sm" id="id_rel_rel">
+
+                        <div class="form-group">
+                            <label for="s2mReference">Référence article</label>
+                            <input type="text" class="form-control form-control-sm" id="s2mReference" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="s2mLibelle">Libellé article</label>
+                            <input type="text" class="form-control form-control-sm" id="s2mLibelle" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="s2mGencode">Gencode</label>
+                            <input type="text" class="form-control form-control-sm" id="s2mGencode" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="s2mPrix">Prix article</label>
+                            <input type="text" class="form-control form-control-sm" id="s2mPrix" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="s2mZone">Zone</label>
+                            <input type="text" class="form-control form-control-sm" id="s2mZone" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Boîte ENSEIGNE -->
+                    <div class="box-container-detail concurrent-box">
+                        <div class="box-header">
+                            <h5 id="concurrent_info"></h5>
+                        </div>
+                        <div class="form-group">
+                            <label for="concurrentReference">Référence article</label>
+                            <input type="text" class="form-control form-control-sm" id="concurrentReference" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="concurrentLibelle">Libellé article</label>
+                            <input type="text" class="form-control form-control-sm" id="concurrentLibelle">
+                        </div>
+                        <div class="form-group">
+                            <label for="concurrentGencode">Gencode</label>
+                            <input type="text" class="form-control form-control-sm" id="concurrentGencode">
+                        </div>
+                        <div class="form-group">
+                            <label for="concurrentPrix">Prix article</label>
+                            <input type="number" class="form-control form-control-sm" id="concurrentPrix">
+                        </div>
+                        <div class="form-group">
+                            <label for="concurrentZone">Autres information concurrent:</label>
+                            <input type="text" class="form-control form-control-sm" id="concurrentAutre">
+                            <input type="hidden" class="form-control form-control-sm" id="id_concurrent">
+                        </div>
+                    </div>
+
+                    <!-- Nouvelle Boîte PHOTO -->
+                    <div class="box-container-detail photo-box">
+                        <div class="box-header">
+                            <h5>Photo de l'article</h5>
+                        </div>
+                        <div class="form-group" id="conteneurImage">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" id="modifier_releve" class="btn btn-primary" onClick="UpdateInformationArticleConcurrent()">Modifier</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de réinitialisation -->
+<div class="modal fade" id="reinitialisationReleveModal" tabindex="-1" role="dialog" aria-labelledby="reinitialisationReleveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reinitialisationReleveModalLabel">REINITIALISATION ETAT RELEVE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center><h5>Voulez-vous vraiment réinitialiser l'état relevé ci-dessous?</h5></center>
+                <br><br>
+                <ul>
+                    <li>NUMERO: <span id="num"></span></li>
+                    <li>NOM: <span id="nom"></span></li>
+                    <li>ENSEIGNE: <span id="enseignes"></span></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="hiddenNum">
+                <input type="hidden" id="hiddenEtat">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                <button type="button" class="btn btn-primary" onClick="ConfirmUpdateEtatReleve()">Oui</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- alimentation index releve -->
+<div class="modal fade" id="nouveauArticleModal" tabindex="-1" role="dialog" aria-labelledby="nouveauArticleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nouveauArticleModalLabel">
+                    <span>AJOUT ARTICLE</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="quitteralimindexrel">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Section Nomenclature -->
+                <div class="container">
+                    <a href="#" id="impoExc" class="toggle-link-releve"><b>IMPORTATION EXCEL</b></a>
+                    <a href="#" id="nomm" class="toggle-link-releve active"><b>NOMENCLATURES</b></a>
+                </div>
+                <br><br>
+
+                <input type="hidden" id="id_zone">
+                <input type="hidden" id="id_enseigne">
+              
+                <!-- Section Critère -->
+                <div id="nomenclature-section">
+                    <div class="form-group">
+                        <label for="crit">CRITERE</label>
+                        <select id="crit" class="selectpicker form-control" onchange="TypeFiltre(this.value)" data-live-search="true">
+                            <option value="">-----Choisir un critère-----</option>
+                            <option value="ray">Rayon</option>
+                            <option value="art">Reference article</option>
+                            <option value="sec">Secteur</option>
+                            <option value="fam">Famille</option>
+                            <option value="sfam">Sous famille</option>
+                        </select>
+                    </div>
+                    <div id="select-container" class="form-group"></div>
+                    
+                    <div class="modal-footer">
+                        <div id="loading-indicator" class="loading-stars">
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                        </div>
+                        <button type="button" class="btn btn-primary" onClick="InsertArticleReleve()">Valider</button>
+                    </div>
+                </div>
+
+                <!-- Section Import Excel -->
+                <div id="import-excel-releve" style="display:none;">
+                    <div class="container">
+                        <h3>FORMAT DU FICHIER</h3>
+                        <ul>
+                            <li>XLS</li>
+                            <li>XLSX</li>
+                            <li>CSV</li>
+                        </ul>
+                        <h3>CONTENU DU FICHIER SANS EN-TETE</h3>
+                        <ul>
+                            <li>REFERENCE</li>
+                            <li>LIBELLE</li>
+                            <li>GENCODE</li>
+                        </ul>
+                        <form id="upload-form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="file" name="importExcelReleve" id="importExcelReleve" accept=".xls,.xlsx,.csv" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="uploadFileReleve()">Importer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de concurrent -->
+<div class="modal fade" id="nouveauArticleConcurrentModal" tabindex="-1" role="dialog" aria-labelledby="nouveauArticleConcurrentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nouveauArticleConcurrentModalLabel">NOUVEAUX ARTICLES CONCURRENTS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="id_zone" >
+            <input type="hidden" id="id_enseigne">
+            <div class="modal-body">
+                <h5>FORMAT DU FICHIER</h5>
+                <ul>
+                    <li>XLS</li>
+                    <li>XLSX</li>
+                </ul>
+                <h5>CONTENU DU FICHIER AVEC EN-TETE</h5>
+                <ul>
+                    <li>Gencode concurrent</li>
+                    <li>Libelle article concurrent</li>
+                    <li>Prix article concurrent</li>
+                    <li>Commentaire</li>
+                </ul>
+                <div class="form-group">
+                    <label for="file-input">Choisir un fichier :</label>
+                    <input type="file" id="importExcelRattachement" name="importExcelRattachement" class="form-control" accept=".xlsx, .xls">
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary" onclick="uploadFileReleveConcurrent()">Valider</button>
+            
+            </div>
+        </div>
+    </div>
+</div>
+

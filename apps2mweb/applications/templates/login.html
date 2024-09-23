@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>S2M-WEB | Connexion </title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/s2mweb.png' %}"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/users/login-3.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->  
+    {% comment %} Fenosoa {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/relever-prix-concurent/listes.css' %}">
+
+</head>
+<body class="login">
+
+    <form class="form-login">
+        <div class="row">
+            <div class="col-md-12 text-center mb-4">
+                <img alt="logo" src="{% static 'assets/img/s2mweb.png' %}" class="theme-logo">
+            </div>
+            <div class="col-md-12">
+
+                <div class="division mt-4 mb-5">
+                    <div class="line line-left"></div>
+                    <div class="line line-right"></div>
+                </div>
+
+                <label for="utilisateur" class="">Utilisateur :</label>                
+                <input type="text" id="utilisateur" class="form-control mb-4" placeholder="Login" required >                    
+                <label for="mdp" class="">Mot de passe :</label>                    
+                <input type="password" id="mdp" class="form-control mb-5" placeholder="Password" required>
+                <button type="button" id="seConnecter" class="btn btn-gradient-dark btn-rounded btn-block">Se connecter</button>
+                <div class="forgot-pass text-center mt-3">
+                    <a href="user_pass_recovery_3.html">Mot de passe oublié ?</a>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                
+            </div>
+        </div>
+    </form>
+    <div class="alert-container"></div>
+    
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'assets/js/libs/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/login.js' %}"></script>
+    <script src="{% static 'assets/js/relever-prix-concurent/validation.js' %}"></script>
+    
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+</body>
+</html>

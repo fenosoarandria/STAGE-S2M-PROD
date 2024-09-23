@@ -1,0 +1,124 @@
+<div id="content" class="main-content">
+    <div class="container-fluid">
+        <!-- En-tête de la page -->
+        <div class="header text-center">
+            <h3>LISTE ENSEIGNE</h3>
+        </div>
+        
+        <!-- Conteneur pour la recherche -->
+        <div class="box mb-4">
+            <div class="form-inline">
+               <!-- Bouton pour ouvrir le modal "Nouveau enseigne" -->
+               <button class="btn-advanced" data-toggle="modal" data-target="#nouveauEnseigneModal" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau enseigne">
+                    <i class="flaticon-plus"></i>
+                </button> 
+                
+                
+                <div class="search-container">
+                    <input type="text" id="searchEnseigneInput" class="form-control form-control-sm" placeholder="Recherche">
+                    <i class="flaticon-search search-icon"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conteneur pour la table -->
+        <div class="box">
+            <div class="btn-container">
+                <button onclick="exportEnseigne()" class="export-btn export-btn-excel" >
+                    <i class="fas fa-file-excel"></i>
+                </button>   
+                <button onclick="generatePdfEnseigne()" class="export-btn export-btn-pdf">
+                    <i class="fas fa-file-pdf"></i>
+                </button>            
+            </div>
+            <br>
+            <div class="table-responsive mb-4">
+                <table id="table-enseigne" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">ID_ENSEIGNE</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">LIBELLE ENSEIGNE</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">AUTRES RUBRIQUES</th>
+                            <th style="color: black; text-align:center; background-color: #7292B2;">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>    
+                    </tbody>
+                </table>                            
+            </div>
+            
+            <!-- Pagination -->
+            <nav id="pagination-enseigne" aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" id="prev-page-main"><a class="page-link" href="#">Précédente</a></li>
+                    <li class="page-item" id="next-page-main"><a class="page-link" href="#">Suivante</a></li>
+                </ul>
+            </nav>  
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nouveau Enseigne -->
+<div class="modal fade" id="nouveauEnseigneModal" tabindex="-1" role="dialog" aria-labelledby="nouveauEnseigneModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nouveauEnseigneModalLabel">Nouveau enseigne</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <form id="ajoutEnseigneForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nomEnseigne">Nom enseigne :</label>
+                        <input type="text" id="nomEnseigne" class="form-control" placeholder="Veuillez choisir le nouvel enseigne" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Rubrique">Autres rubrique :</label>
+                        <input type="text" id="rubriqueEnseigne"  class="form-control" placeholder="Autre informations à propos de l'enseigne" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" onclick="InsertEnseigne()">Sauvegarder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Action -->
+<div class="modal fade" id="actionEnseigneModal" tabindex="-1" role="dialog" aria-labelledby="actionEnseigneModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actionEnseigneModalLabel">Gérer Enseigne</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <form id="updateEnseigneForm" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nomEnseigneUpdate">Nom enseigne :</label>
+                        <input type="text" name="nom" class="form-control" id="nomEnseigneUpdate" placeholder="Veuillez créer le nom du nouveau enseigne" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Rubrique">Rubrique :</label>
+                        <input type="text" name="rubrique" class="form-control" id="Rubrique" placeholder="Veuillez créer la rubrique du nouveau enseigne" required>
+                    </div>
+                    <input type="hidden" name="id" id="enseigneId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

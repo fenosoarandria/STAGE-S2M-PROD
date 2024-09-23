@@ -1,0 +1,85 @@
+body {
+  background-color: #fff;
+}
+
+.h5 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+.h4 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+.h6 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+#headerWrapper {
+  padding: 30px 50px;
+  background-color: #6156ce;
+}
+#headerWrapper .main-heading {
+  color: #fff;
+  margin: 0;
+}
+#headerWrapper .main-heading i {
+  font-size: 50px;
+  vertical-align: sub;
+}
+
+#privacyWrapper {
+  padding: 80px 0;
+}
+#privacyWrapper h5 {
+  color: #ee3d50;
+  margin: 0;
+}
+#privacyWrapper p {
+  color: #888ea8;
+  text-align: justify;
+}
+#privacyWrapper ul.policy-list li {
+  color: #888ea8;
+  text-align: justify;
+  margin-bottom: 35px;
+}
+#privacyWrapper ul.policy-list strong {
+  color: #3b3f5c;
+}
+#privacyWrapper p.policy-info-ques {
+  color: #6156ce;
+}
+
+#footerWrapper.footer-section {
+  position: unset;
+  margin: 0;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.3);
+  border-top: solid 1px #f1f3f1;
+}
+
+#footerWrapper .bottom-footer {
+  color: #6156ce;
+}
+#footerWrapper .bottom-footer a {
+  color: #6156ce;
+}
+#footerWrapper ul {
+  padding: 12px 0;
+}
+#footerWrapper ul li a {
+  color: #ee3d50;
+  font-weight: 600;
+}/*# sourceMappingURL=privacy.css.map */

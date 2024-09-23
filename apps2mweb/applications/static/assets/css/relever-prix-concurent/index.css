@@ -1,0 +1,94 @@
+ 
+    #page-title {
+        text-align: center;
+        animation: fadeInDown 1s ease;
+    }
+
+    #page-title h4 {
+        font-size: 1.5em;
+        margin: 0;
+        /* color: #333; */
+    }
+
+    /* Styles pour les onglets de navigation */
+    .nav-tabs {
+        margin-bottom: 20px;
+
+    }
+
+    .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation: slideIn 1s ease;
+     
+    }
+
+    .nav-tabs .nav-link {
+        color: #000;
+        text-decoration: none;
+        font-size: 1em;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-tabs .nav-link:hover {
+        background-color: #ffffff;
+        transform: scale(1.05);
+    }
+
+       /* Animation pour l'apparition des éléments */
+       @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Styles responsifs */
+    @media (max-width: 995px) {
+        .navbar {
+            box-shadow: none;
+        }
+
+        .navbar a {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .widget-header {
+            margin-top: 80px;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .navbar {
+            box-shadow: none;
+        }
+
+        .navbar a {
+            text-align: center;
+            font-size: 0.8em;
+        }
+
+        .widget-header {
+            margin-top: 100px;
+        }
+    }

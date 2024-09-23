@@ -1,0 +1,84 @@
+.dropzone {
+  box-sizing: border-box;
+  position: relative;
+}
+.dropzone * {
+  box-sizing: border-box;
+}
+.dropzone .dz-preview {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  margin: 0.5em;
+}
+.dropzone .dz-preview .dz-progress {
+  display: block;
+  height: 15px;
+  border: 1px solid #aaa;
+}
+.dropzone .dz-preview .dz-progress .dz-upload {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #1abc9c;
+}
+.dropzone .dz-preview .dz-error-message {
+  color: #e7515a;
+  display: none;
+}
+.dropzone .dz-preview .dz-error-mark {
+  position: absolute;
+  display: none;
+  left: 30px;
+  top: 30px;
+  width: 54px;
+  height: 58px;
+  left: 50%;
+  margin-left: -27px;
+}
+.dropzone .dz-preview .dz-success-mark {
+  position: absolute;
+  display: none;
+  left: 30px;
+  top: 30px;
+  width: 54px;
+  height: 58px;
+  left: 50%;
+  margin-left: -27px;
+}
+.dropzone .dz-preview.dz-error .dz-error-message {
+  display: block;
+}
+.dropzone .dz-preview.dz-error .dz-error-mark {
+  display: block;
+}
+.dropzone .dz-preview.dz-success .dz-success-mark {
+  display: block;
+}
+
+.dropzone-file-area {
+  background: #fff;
+  padding: 50px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 4px;
+}
+.dropzone-file-area i {
+  font-size: 50px;
+}
+
+.dropzone.dz-clickable * {
+  color: #3b3f5c;
+}
+
+.dropzone-file-area.dropzone-file-area--secondary {
+  border: 1px dashed #805dca;
+  background-color: #dccff7;
+  color: #3b3f5c;
+}
+
+.dropzone-file-area.dropzone-file-area--success {
+  border: 1px dashed #00b1f4;
+  background-color: #bae7ff;
+  color: #3b3f5c;
+}/*# sourceMappingURL=basic.min.css.map */

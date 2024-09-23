@@ -1,0 +1,48 @@
+.table > thead > tr > th {
+  color: #000;
+  font-weight: 600;
+}
+.table td {
+  border-top: 1px solid #f1f3f1;
+}
+.table th {
+  border-top: 1px solid #f1f3f1;
+}
+.table > tbody > tr > td {
+  color: #3b3f5c;
+}
+.table > tbody > tr > td button.btn {
+  padding: 3px 10px;
+}
+.table > tfoot > tr > th {
+  font-weight: 700;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+.table-hover:not(.table-dark) tbody tr:hover {
+  color: #3862f5;
+}
+
+.dataTables_filter input {
+  margin-left: 5px;
+  border-radius: 30px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border: solid 1px #888ea8;
+}
+
+.page-item.active .page-link {
+  border-color: #6156ce;
+  background-color: #6156ce;
+}
+
+.page-link:focus {
+  box-shadow: none;
+}
+
+ul.pagination li a:hover:not(.active) {
+  background-color: #25d5e4;
+}/*# sourceMappingURL=custom_dt_ordering_sorting.css.map */

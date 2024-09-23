@@ -1,0 +1,103 @@
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+{% load static %}
+<div id="content" class="main-content">
+    <div class="container-fluid">
+  <div  style="">
+    <div style="height: 500px;"></div><br><br><br><br><br><br><br>
+    <div class="row" style="background-color: #e5e7eb; ">
+    <div style="height: 200px;"></div>
+    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well" style="padding: 40px; text-align: center;">
+    		<h2 class="text-center"><strong style="font-weight:bold; font-size: 2.5em;">CERTIFICAT DE TRAVAIL</strong></h2>
+    	</div>
+    </div><!--/row-->
+    <div class="row" style="padding-left: 20px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 1.6em;"> <br>
+        <p>Nous soussignés, <strong style="font-weight:bold">SOCIETE MALGACHE DE MAGASINS,</strong> certifions par la présente <br>avoir employé:</p><br>
+      </div>
+    </div><!--/row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;"><!-- 
+        <?php
+          $extSexe = ($tabPers->sexe == "Masculin") ? "Monsieur " : "Madame " ;
+          $extArticl = ($tabPers->sexe == "Masculin") ? "Il " : "Elle " ;
+        ?> -->
+        <div class="text-center" style="padding-left:20px; font-size: 2.2em">
+          Monsieur <strong style="font-weight:bold;"> RAKOTOBE Tsilavina</strong>
+         <!--  <?php echo $extSexe; ?><strong style="font-weight:bold;"><?php echo $tabPers->nomcomplet.' '.$tabPers->prenom;  ?></strong> -->
+        </div><br>
+      </div>
+    </div><!--/row-->
+    <div class="row" style="padding-left: 12px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table>
+          <tbody>
+            <tr>
+              <td colspan="2" style="font-size: 1.6em;">En qualité de :</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-size: 1.6em;">
+                <strong style="font-weight:bold">
+                  <!-- <?php echo ' '.$tabPers->nom_fonction; ?> -->
+                </strong>
+                <strong style="font-weight:bold"> 
+                {{ personnel.4 }} </strong>  du  <strong> {{ datedeb }} au  {{ datefn }}</strong>
+                
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="text-center" style="font-size: 1.6em; padding-left: 100px;"> 
+                <i>- Catégorie professionnelle : <strong style="font-weight:bold"> {{ personnel.3 }}</strong></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row" style="padding-left: 12px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <!-- <br><p><?php echo $extArticl.' '; ?>nous quitte ce jour libre de tout engagement</p> -->
+      </div>
+    </div><!--/row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br/>
+      </div>
+    </div><!--/row-->
+    <div class="row" style="padding-left: 25px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" font-size: 1.6em;">
+        <p >Pour faire valoir et servir ce que de droit.</p><br><br>
+      </div>
+    </div><!--/row-->
+    <div class="row" style="padding-right: 27px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" font-size: 1.6em;">
+        <p style="text-align:right;"> Antananarivo, le {{ maintenant }}
+
+        </p>
+      </div>
+    </div><!--/row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br><br><br>
+      </div>
+    </div><!--/row-->
+    <div class="row" style="padding-right: 27px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" font-size: 1.6em;">
+        <p style="text-align:right;">Le Directeur Général<br>JP BADANO</p>
+      </div>
+    </div><!--/row-->
+
+    <!--<div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form action="" method="POST" role="form">
+          <button type="submit" class="btn btn-primary" name="btnOK">Submit</button>
+        </form>
+      </div>
+    </div>-->
+
+   </div><!--/container-fluid-->  
+   </div>
+   </div>    
+   {% endblock %}

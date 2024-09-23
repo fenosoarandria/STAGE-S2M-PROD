@@ -1,0 +1,391 @@
+/* 2.0 - Button style
+------------------------------------------------------------------------*/
+/* 2.1 - Default Button style
+-------------------------------------------------*/
+.hb {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+.hb:before {
+  position: absolute;
+  content: "";
+  left: -1px;
+  top: 0;
+  z-index: -1;
+  transform: rotate(60deg);
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+.hb:after {
+  position: absolute;
+  content: "";
+  left: -1px;
+  top: 0;
+  z-index: -1;
+  transform: rotate(-60deg);
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+.hb i {
+  z-index: 9;
+  transition: all 0.25s ease;
+}
+
+.hb-xs .fa {
+  font-size: 20px !important;
+}
+
+.hb-sm .fa {
+  font-size: 30px !important;
+}
+
+.hb-md .fa {
+  font-size: 37px !important;
+}
+
+.hb-lg .fa {
+  font-size: 42px !important;
+}
+
+/* 2.1 - Default Button style End
+-------------------------------------------------*/
+/* 2.2 - Large Button style 
+-------------------------------------------------*/
+.hb-lg {
+  line-height: 42px;
+  font-size: 42px;
+  margin: 22px 0px;
+  height: 42px;
+  width: 73px;
+}
+.hb-lg:before {
+  height: 42px;
+  width: 73px;
+}
+.hb-lg:after {
+  height: 42px;
+  width: 73px;
+}
+
+/* 2.2 - Large Button style  End
+-------------------------------------------------*/
+/* 2.3 - Medium Button style 
+-------------------------------------------------*/
+.hb-md {
+  line-height: 37px;
+  font-size: 37px;
+  margin: 21px 0px;
+  height: 37px;
+  width: 64px;
+}
+.hb-md:before {
+  height: 37px;
+  width: 64px;
+}
+.hb-md:after {
+  height: 37px;
+  width: 64px;
+}
+
+/* 2.3 - Medium Button style End
+-------------------------------------------------*/
+/* 2.4 - Small Button style 
+-------------------------------------------------*/
+.hb-sm {
+  line-height: 30px;
+  font-size: 30px;
+  margin: 18.5px 0px;
+  height: 30px;
+  width: 52px;
+}
+.hb-sm:before {
+  height: 30px;
+  width: 52px;
+}
+.hb-sm:after {
+  height: 30px;
+  width: 52px;
+}
+
+/* 2.4 - Small Button style  End
+-------------------------------------------------*/
+/* 2.5 - Extra Small Button style 
+-------------------------------------------------*/
+.hb-xs {
+  line-height: 18.5px;
+  font-size: 18.5px;
+  margin: 9.5px 0px;
+  height: 18.5px;
+  width: 32px;
+}
+.hb-xs:before {
+  height: 18.5px;
+  width: 32px;
+}
+.hb-xs:after {
+  height: 18.5px;
+  width: 32px;
+}
+
+/* 2.5 - Extra Small Button style  End
+-------------------------------------------------*/
+/* 2.0 - Button style End
+------------------------------------------------------------------------*/
+/* 3.0 - Margin of hexagon
+------------------------------------------------------------------------*/
+.hb-lg-margin {
+  margin: 9px;
+  display: inline-block;
+  overflow: hidden;
+  height: 89px;
+  width: 73px;
+}
+
+.hb-md-margin {
+  margin: 12px;
+  display: inline-block;
+  overflow: hidden;
+  height: 80px;
+  width: 65px;
+}
+
+.hb-sm-margin {
+  margin: 14px;
+  display: inline-block;
+  overflow: hidden;
+  height: 66px;
+  width: 53px;
+}
+
+.hb-xs-margin {
+  margin: 15px;
+  display: inline-block;
+  overflow: hidden;
+  height: 38px;
+  width: 32px;
+}
+
+/* 3.0 - Margin of hexagon End
+------------------------------------------------------------------------*/
+.hb {
+  background-color: #2c3e50;
+  border-left: 1px solid #2c3e50;
+  border-right: 1px solid #2c3e50;
+  color: #2ecc71;
+}
+.hb:before {
+  background-color: #2c3e50;
+  border-left: 1px solid #2c3e50;
+  border-right: 1px solid #2c3e50;
+  color: #2ecc71;
+}
+.hb:after {
+  background-color: #2c3e50;
+  border-left: 1px solid #2c3e50;
+  border-right: 1px solid #2c3e50;
+  color: #2ecc71;
+}
+.hb:hover {
+  background: transparent;
+  border-left: 1px solid #2ecc71;
+  border-right: 1px solid #2ecc71;
+  color: #2ecc71;
+}
+.hb:hover:before {
+  background: transparent;
+  border-left: 1px solid #2ecc71;
+  border-right: 1px solid #2ecc71;
+  color: #2ecc71;
+}
+.hb:hover:after {
+  background: transparent;
+  border-left: 1px solid #2ecc71;
+  border-right: 1px solid #2ecc71;
+  color: #2ecc71;
+}
+
+/* 5.3 - Custom Button colors
+-------------------------------------------------*/
+.hb-custom {
+  background: #888ea8 !important;
+  color: #fff !important;
+  border-left: 1px solid #888ea8 !important;
+  border-right: 1px solid #888ea8 !important;
+}
+.hb-custom:before {
+  background: #888ea8 !important;
+  color: #fff !important;
+  border-left: 1px solid #888ea8 !important;
+  border-right: 1px solid #888ea8 !important;
+}
+.hb-custom:after {
+  background: #888ea8 !important;
+  color: #fff !important;
+  border-left: 1px solid #888ea8 !important;
+  border-right: 1px solid #888ea8 !important;
+}
+.hb-custom:hover {
+  background: #3b3f5c !important;
+  border-left: 1px solid #3b3f5c !important;
+  color: #fff !important;
+  border-right: 1px solid #3b3f5c !important;
+}
+.hb-custom:hover:before {
+  background: #3b3f5c !important;
+  border-left: 1px solid #3b3f5c !important;
+  color: #fff !important;
+  border-right: 1px solid #3b3f5c !important;
+}
+.hb-custom:hover:after {
+  background: #3b3f5c !important;
+  border-left: 1px solid #3b3f5c !important;
+  color: #fff !important;
+  border-right: 1px solid #3b3f5c !important;
+}
+
+/* 5.3 - Custom Button colors End
+-------------------------------------------------*/
+/* 6.1 - Facebook
+-------------------------------------------------*/
+.hb-facebook {
+  background: #1a73e9;
+  border-color: #1a73e9;
+  color: #fff;
+}
+.hb-facebook:before {
+  background: #1a73e9;
+  border-color: #1a73e9;
+  color: #fff;
+}
+.hb-facebook:after {
+  background: #1a73e9;
+  border-color: #1a73e9;
+  color: #fff;
+}
+.hb-facebook:hover {
+  background: transparent;
+  border-color: #3862f5;
+  color: #3862f5;
+}
+.hb-facebook:hover:before {
+  background: transparent;
+  border-color: #3862f5;
+  color: #3862f5;
+}
+.hb-facebook:hover:after {
+  background: transparent;
+  border-color: #3862f5;
+  color: #3862f5;
+}
+
+/* 6.1 - Facebook End
+-------------------------------------------------*/
+/* 6.2 - Twitter
+-------------------------------------------------*/
+.hb-twitter {
+  background: #00b1f4;
+  border-color: #00b1f4;
+  color: #fff;
+}
+.hb-twitter:before {
+  background: #00b1f4;
+  border-color: #00b1f4;
+  color: #fff;
+}
+.hb-twitter:after {
+  background: #00b1f4;
+  border-color: #00b1f4;
+  color: #fff;
+}
+.hb-twitter:hover {
+  background: transparent;
+  border-color: #00b1f4;
+  color: #00b1f4;
+}
+.hb-twitter:hover:before {
+  background: transparent;
+  border-color: #00b1f4;
+  color: #00b1f4;
+}
+.hb-twitter:hover:after {
+  background: transparent;
+  border-color: #00b1f4;
+  color: #00b1f4;
+}
+
+/* 6.2 - Twitter End
+-------------------------------------------------*/
+/* 6.3 - Google Plus
+-------------------------------------------------*/
+.hb-google-plus {
+  background: #e7515a;
+  border-color: #e7515a;
+  color: #fff;
+}
+.hb-google-plus:before {
+  background: #e7515a;
+  border-color: #e7515a;
+  color: #fff;
+}
+.hb-google-plus:after {
+  background: #e7515a;
+  border-color: #e7515a;
+  color: #fff;
+}
+.hb-google-plus:hover {
+  background: transparent;
+  border-color: #e7515a;
+  color: #e7515a;
+}
+.hb-google-plus:hover:before {
+  background: transparent;
+  border-color: #e7515a;
+  color: #e7515a;
+}
+.hb-google-plus:hover:after {
+  background: transparent;
+  border-color: #e7515a;
+  color: #e7515a;
+}
+
+/* 6.3 - Google Plus End
+-------------------------------------------------*/
+/* 6.15 - dribbble
+-------------------------------------------------*/
+.hb-dribbble {
+  background: #e9b02b;
+  border-color: #e9b02b;
+  color: #fff;
+}
+.hb-dribbble:before {
+  background: #e9b02b;
+  border-color: #e9b02b;
+  color: #fff;
+}
+.hb-dribbble:after {
+  background: #e9b02b;
+  border-color: #e9b02b;
+  color: #fff;
+}
+.hb-dribbble:hover {
+  background: transparent;
+  border-color: #e9b02b;
+  color: #e9b02b;
+}
+.hb-dribbble:hover:before {
+  background: transparent;
+  border-color: #e9b02b;
+  color: #e9b02b;
+}
+.hb-dribbble:hover:after {
+  background: transparent;
+  border-color: #e9b02b;
+  color: #e9b02b;
+}
+
+/* 6.15 - dribbble End
+-------------------------------------------------*//*# sourceMappingURL=hexagons.css.map */
