@@ -1,0 +1,46 @@
+.additional-usage .dropdown-toggle::after {
+  display: none;
+}
+.additional-usage h5 {
+  color: #3232b7;
+  font-size: 0.875rem;
+}
+
+.keypad-usage h6 {
+  color: #3232b7;
+  font-size: 0.75rem;
+}
+
+.input-control input {
+  border: 1px #d5dae2 solid;
+  color: #3b3f5c;
+}
+.input-control input:hover {
+  border-color: #00d1c1;
+  border-radius: 2px;
+}
+
+.keypad .key {
+  border: 1px #e9ecef solid;
+  color: #e95f2b;
+}
+.keypad .key:hover {
+  background-color: #25d5e4;
+  color: #fff;
+}
+
+.button {
+  color: #888ea8;
+}
+.button:hover {
+  border-color: #00d1c1;
+}
+.button:active {
+  color: #3b3f5c;
+  background-color: #fff;
+  box-shadow: none;
+}
+
+.debug {
+  border: 1px dashed #ee3d50;
+}/*# sourceMappingURL=custom-keypad.css.map */

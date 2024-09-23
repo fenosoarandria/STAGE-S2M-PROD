@@ -1,0 +1,191 @@
+ol {
+  list-style: none;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+q:before {
+  content: "";
+}
+q:after {
+  content: "";
+}
+
+em {
+  font-style: italic;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.aligncenter {
+  display: block;
+  margin: 0 auto;
+}
+
+.alignleft {
+  float: left;
+  margin: 10px;
+}
+
+.alignright {
+  float: right;
+  margin: 10px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-bottom {
+  margin-bottom: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.margin-t {
+  margin-top: 25px;
+}
+
+.set-1 ul {
+  padding-left: 0;
+}
+.set-1 ul li {
+  display: inline-block;
+}
+.set-1 a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  border-radius: 6px;
+  text-align: center;
+  transform: translate(0, 0);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+.set-1 a img {
+  width: 2.5rem;
+}
+.set-1 a:active {
+  transform: translate(0, 3px);
+}
+
+.set-2 ul {
+  padding-left: 0;
+}
+.set-2 ul li {
+  display: inline-block;
+}
+.set-2 a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 0 15px 0 0;
+  transform: translate(0, 0);
+  transition: all 0.2s ease;
+}
+.set-2 a:active {
+  transform: translate(0, 3px);
+}
+.set-2 a img {
+  width: 2.5rem;
+}
+
+a.twitter-small {
+  box-shadow: 0px 6px 0px #3498db;
+  background: #00b1f4;
+}
+a.twitter-small:active {
+  box-shadow: 0px 2px 0px #3498db;
+}
+
+a.twitter-big {
+  box-shadow: 0px 6px 0px #3498db;
+  background: #00b1f4;
+}
+a.twitter-big:active {
+  box-shadow: 0px 2px 0px #3498db;
+}
+
+a.facebook-small {
+  box-shadow: 0px 6px 0px #004B8C;
+  background: #1a73e9;
+}
+a.facebook-small:active {
+  box-shadow: 0px 2px 0px #004B8C;
+}
+
+a.facebook-big {
+  box-shadow: 0px 6px 0px #004B8C;
+  background: #1a73e9;
+}
+a.facebook-big:active {
+  box-shadow: 0px 2px 0px #004B8C;
+}
+
+a.pinterest-small {
+  box-shadow: 0px 6px 0px #db0000;
+  background: #e7515a;
+}
+a.pinterest-small:active {
+  box-shadow: 0px 2px 0px #db0000;
+}
+
+a.pinterest-big {
+  box-shadow: 0px 6px 0px #db0000;
+  background: #e7515a;
+}
+a.pinterest-big:active {
+  box-shadow: 0px 2px 0px #db0000;
+}
+
+a.gplus-small {
+  box-shadow: 0px 6px 0px #141412;
+  position: relative;
+  background: #4f5163;
+}
+a.gplus-small:active {
+  box-shadow: 0px 2px 0px #141412;
+}
+
+a.gplus-big {
+  box-shadow: 0px 6px 0px #141412;
+  position: relative;
+  background: #4f5163;
+}
+a.gplus-big:active {
+  box-shadow: 0px 2px 0px #141412;
+}
+
+a.dribbble-small {
+  box-shadow: 0px 6px 0px #ff961f;
+  background: #e9b02b;
+}
+a.dribbble-small:active {
+  box-shadow: 0px 2px 0px #ff961f;
+}
+
+a.dribbble-big {
+  box-shadow: 0px 6px 0px #ff961f;
+  background: #e9b02b;
+}
+a.dribbble-big:active {
+  box-shadow: 0px 2px 0px #ff961f;
+}/*# sourceMappingURL=social.css.map */

@@ -1,0 +1,284 @@
+/*
+* params: name, background, backgroundHover, backgroundActive, item, itemHover, itemActive, itemDisabled
+*/
+.calendar.darcula {
+  background: #4f5163;
+}
+.calendar.darcula a {
+  color: #fff;
+}
+.calendar.darcula a:hover {
+  background: #3f4257;
+  color: #fff;
+}
+.calendar.darcula .calendar-header {
+  background: #4f5163;
+}
+.calendar.darcula .today a {
+  background-color: #888ea8;
+  text-shadow: none;
+}
+.calendar.darcula .day {
+  border-color: #3f4257;
+}
+.calendar.darcula .month {
+  border-color: #3f4257;
+}
+.calendar.darcula .year {
+  border-color: #3f4257;
+}
+.calendar.darcula .other-day {
+  background: #3f4257;
+  border-color: #3f4257;
+}
+.calendar.darcula .day-of-week {
+  color: #fff;
+}
+.calendar.darcula .calendar-actions .calendar-btn-today {
+  background: #3f4257;
+  border-color: #3f4257;
+}
+.calendar.darcula .calendar-actions .calendar-btn-today:active {
+  background: #3f4257;
+}
+.calendar.darcula .calendar-actions .calendar-btn-clear {
+  background: #515365;
+  border-color: #3f4257;
+}
+
+.calendar.info {
+  background: #00b1f4;
+}
+.calendar.info a {
+  color: #fff;
+}
+.calendar.info a:hover {
+  background: #0081e6;
+  color: #fff;
+}
+.calendar.info .calendar-header {
+  background: #00b1f4;
+}
+.calendar.info .today a {
+  background-color: #0081e6;
+  text-shadow: none;
+}
+.calendar.info .day {
+  border-color: #0081e6;
+}
+.calendar.info .month {
+  border-color: #0081e6;
+}
+.calendar.info .year {
+  border-color: #0081e6;
+}
+.calendar.info .other-day {
+  background: #06a8e6;
+  border-color: #00b1f4;
+}
+.calendar.info .day-of-week {
+  color: #fff;
+}
+.calendar.info .calendar-actions .calendar-btn-today {
+  background: #0081e6;
+  border-color: #0081e6;
+}
+.calendar.info .calendar-actions .calendar-btn-today:active {
+  background: #0081e6;
+}
+.calendar.info .calendar-actions .calendar-btn-clear {
+  background: transparent;
+  border-color: #0081e6;
+}
+
+.calendar.primary {
+  background: #1a73e9;
+}
+.calendar.primary a {
+  color: #fff;
+}
+.calendar.primary a:hover {
+  background: #5a95f5;
+  color: #fff;
+}
+.calendar.primary .calendar-header {
+  background: #3862f5;
+}
+.calendar.primary .today a {
+  background-color: #3232b7;
+  text-shadow: none;
+}
+.calendar.primary .day {
+  border-color: #3232b7;
+}
+.calendar.primary .month {
+  border-color: #3232b7;
+}
+.calendar.primary .year {
+  border-color: #3232b7;
+}
+.calendar.primary .other-day {
+  background: #365ee8;
+  border-color: #365ee8;
+}
+.calendar.primary .day-of-week {
+  color: #fff;
+}
+.calendar.primary .calendar-actions .calendar-btn-today {
+  background: #3232b7;
+  border-color: #3232b7;
+}
+.calendar.primary .calendar-actions .calendar-btn-today:active {
+  background: #3232b7;
+}
+.calendar.primary .calendar-actions .calendar-btn-clear {
+  background: transparent;
+  border-color: #3232b7;
+}
+
+.calendar.secondary {
+  background: #805dca;
+}
+.calendar.secondary a {
+  color: #fff;
+}
+.calendar.secondary a:hover {
+  background: #6f46c3;
+  color: #fff;
+}
+.calendar.secondary .calendar-header {
+  background: #805dca;
+}
+.calendar.secondary .today a {
+  background-color: #643bb9;
+  text-shadow: none;
+}
+.calendar.secondary .day {
+  border-color: #9061f3eb;
+  border-color: rgba(144, 97, 243, 0.9215686275);
+}
+.calendar.secondary .month {
+  border-color: #9061f3eb;
+  border-color: rgba(144, 97, 243, 0.9215686275);
+}
+.calendar.secondary .year {
+  border-color: #9061f3eb;
+  border-color: rgba(144, 97, 243, 0.9215686275);
+}
+.calendar.secondary .other-day {
+  background: #855cda;
+  border-color: #855cda;
+}
+.calendar.secondary .day-of-week {
+  color: #fff;
+}
+.calendar.secondary .calendar-actions .calendar-btn-today {
+  background: #643bb9;
+  border-color: #643bb9;
+}
+.calendar.secondary .calendar-actions .calendar-btn-today:active {
+  background: #643bb9;
+}
+.calendar.secondary .calendar-actions .calendar-btn-clear {
+  background: transparent;
+  border-color: #643bb9;
+}
+
+.calendar.success {
+  background: #1abc9c;
+}
+.calendar.success a {
+  color: #fff;
+}
+.calendar.success a:hover {
+  background: #2ea37d;
+  color: #fff;
+}
+.calendar.success .calendar-header {
+  background: #1abc9c;
+}
+.calendar.success .today a {
+  background-color: #2ea37d;
+  text-shadow: none;
+}
+.calendar.success .day {
+  border-color: #2ea37d;
+}
+.calendar.success .month {
+  border-color: #2ea37d;
+}
+.calendar.success .year {
+  border-color: #2ea37d;
+}
+.calendar.success .other-day {
+  background: #2ea37d;
+  border-color: #2ea37d;
+  color: #e9ecef;
+}
+.calendar.success .day-of-week {
+  color: #fff;
+}
+.calendar.success .calendar-actions .calendar-btn-today {
+  background: #2ea37d;
+  border-color: #2ea37d;
+}
+.calendar.success .calendar-actions .calendar-btn-today:active {
+  background: #05c35e;
+}
+.calendar.success .calendar-actions .calendar-btn-clear {
+  background: transparent;
+  border-color: #2ea37d;
+}
+
+.calendar.warning {
+  background: #e9b02b;
+}
+.calendar.warning a {
+  color: #3b3f5c;
+}
+.calendar.warning a:hover {
+  background: #f6983c;
+  border-color: #f6983c;
+  color: #fff;
+}
+.calendar.warning .day-of-week {
+  color: #3b3f5c !important;
+  color: #fff;
+}
+.calendar.warning .calendar-header {
+  background: #e9b02b;
+}
+.calendar.warning .today a {
+  background-color: #ffc221;
+  color: #fff;
+  text-shadow: none;
+}
+.calendar.warning .day {
+  background-color: transparent;
+  border: 1px #fca50a solid;
+}
+.calendar.warning .month {
+  background-color: transparent;
+  border: 1px #fca50a solid;
+}
+.calendar.warning .year {
+  background-color: transparent;
+  border: 1px #fca50a solid;
+}
+.calendar.warning .other-day {
+  background: #e9b02b;
+  border-color: #e9b02b;
+  color: #e9ecef;
+}
+.calendar.warning .calendar-actions {
+  background: #f58b22;
+  border-color: #f58b22;
+  background: transparent;
+  border-color: #f58b22;
+}
+.calendar.warning .calendar-actions .calendar-btn-today:active {
+  background: #fca50a;
+}
+.calendar.warning .calendar-actions .calendar-btn-clear {
+  color: #3b3f5c;
+}/*# sourceMappingURL=design-schemes.css.map */

@@ -1,0 +1,483 @@
+pre {
+  white-space: pre-wrap;
+}
+
+button.btn.btn-button-16.btn-sm {
+  padding: 7px 30px;
+  font-size: 13px;
+}
+
+sub {
+  display: block;
+  text-align: right;
+  margin-top: -10px;
+  font-size: 11px;
+  font-style: italic;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.header-search > form > .input-box > .search-box {
+  background-color: #77EDB0;
+  border: none;
+  line-height: 25px;
+  border-radius: 4px;
+  color: #1F3892;
+  margin: 0 0;
+  display: inline;
+  width: auto;
+}
+
+/*
+ * note that styling gu-mirror directly is a bad practice because it's too generic.
+ * you're better off giving the draggable elements a unique class and styling that directly!
+ */
+.dragula > div {
+  margin: 10px;
+  padding: 10px;
+  transition: opacity 0.4s ease-in-out;
+  cursor: move;
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+.dragula .ex-moved {
+  background-color: #e74c3c;
+}
+
+.gu-mirror {
+  margin: 10px;
+  padding: 10px;
+  transition: opacity 0.4s ease-in-out;
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.dragula.ex-over {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+#left-lovehandles > div {
+  cursor: initial;
+}
+
+#right-lovehandles > div {
+  cursor: initial;
+}
+
+.image-thing {
+  margin: 20px 0;
+  display: block;
+  text-align: center;
+}
+
+.slack-join {
+  position: absolute;
+  font-weight: normal;
+  font-size: 14px;
+  right: 10px;
+  top: 50%;
+  margin-top: -8px;
+  line-height: 16px;
+}
+
+/*Ex -1*/
+.parent.ex-1 .dragula {
+  padding: 15px;
+}
+.parent.ex-1 .dragula .media {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+.parent.ex-1 .dragula .media img {
+  width: 50px;
+  border-radius: 50%;
+}
+.parent.ex-1 .dragula .media .media-body h6 {
+  color: #3b3f5c;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 2px;
+}
+.parent.ex-1 .dragula .media .media-body p {
+  color: #888ea8;
+  font-weight: 600;
+  margin-top: -6px;
+}
+
+body.gu-unselectable .media.el-drag-ex-1 {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+body.gu-unselectable .media.el-drag-ex-1 img {
+  width: 50px;
+  border-radius: 50%;
+}
+body.gu-unselectable .media.el-drag-ex-1 .media-body h6 {
+  color: #3b3f5c;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 2px;
+}
+body.gu-unselectable .media.el-drag-ex-1 .media-body p {
+  color: #888ea8;
+  font-weight: 600;
+  margin-top: -6px;
+}
+body.gu-unselectable .media.el-drag-ex-2 {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+body.gu-unselectable .media.el-drag-ex-2 img {
+  width: 45px;
+  border-radius: 50%;
+}
+body.gu-unselectable .media.el-drag-ex-2 i {
+  font-size: 19px;
+  border-radius: 20px;
+}
+body.gu-unselectable .media.el-drag-ex-2 .media-body h6 {
+  color: #3b3f5c;
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 600;
+}
+body.gu-unselectable .media.el-drag-ex-2 .media-body p {
+  color: #888ea8;
+  font-size: 13px;
+  margin-top: -6px;
+}
+body.gu-unselectable .media.el-drag-ex-2 .f-icon-fill {
+  display: none !important;
+  color: #e9b02b;
+  display: block !important;
+  color: #e9b02b;
+}
+body.gu-unselectable .media.el-drag-ex-2 .f-icon-line {
+  display: block !important;
+  color: #888ea8;
+  display: none !important;
+  color: #e9b02b;
+}
+body.gu-unselectable div.media.el-drag-ex-3.gu-mirror {
+  border: 1px solid transparent;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+body.gu-unselectable .media.el-drag-ex-3.gu-mirror img {
+  width: 52px;
+  border-radius: 10%;
+}
+body.gu-unselectable .media.el-drag-ex-3.gu-mirror .media-body h5 {
+  font-size: 13px;
+}
+body.gu-unselectable .media.el-drag-ex-3.gu-mirror .media-body h5 span.usr-commented {
+  font-weight: 600;
+  color: #3b3f5c;
+  font-size: 14px;
+}
+body.gu-unselectable .media.el-drag-ex-3.gu-mirror .media-body h5 span.comment-topic {
+  font-weight: 600;
+  color: #5247bd;
+  font-size: 13px;
+}
+body.gu-unselectable .media.el-drag-ex-3.gu-mirror .media-body p.meta-time {
+  font-size: 11px;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror .media.user-meta {
+  padding: 10px;
+}
+body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror .media.user-meta img {
+  width: 50px;
+  border-radius: 50%;
+}
+body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror .media.user-meta .media-body h5 {
+  font-weight: 600;
+  color: #3b3f5c;
+  font-size: 17px;
+  margin-bottom: 3px;
+}
+body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror .media.user-meta .media-body p {
+  font-size: 11px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror div.people-liked-post ul li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.3);
+  margin-left: -21px;
+}
+body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror div.people-liked-post .people-liked-post-name span {
+  vertical-align: -webkit-baseline-middle;
+  font-size: 12px;
+}
+body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror div.people-liked-post .people-liked-post-name span a {
+  color: #ee3d50;
+  font-weight: 600;
+  font-size: 13px;
+}
+body.gu-unselectable .card.post.text-post.el-drag-ex-4.gu-mirror .card-body .post-content {
+  padding: 20px 18px;
+  color: #888ea8;
+  border-bottom: 1px solid #f1f3f1;
+}
+body.gu-unselectable .handle {
+  padding: 0 9px;
+  margin-right: 5px;
+  background-color: #e9ecef;
+  border-radius: 2px;
+  color: #3b3f5c;
+  cursor: move;
+}
+body.gu-unselectable .media.el-drag-ex-5.gu-mirror ul {
+  position: relative;
+}
+body.gu-unselectable .media.el-drag-ex-5.gu-mirror ul li.badge-notify {
+  position: relative;
+}
+body.gu-unselectable .media.el-drag-ex-5.gu-mirror ul li .notification {
+  position: absolute;
+  top: -30px;
+  left: -5px;
+}
+body.gu-unselectable .media.el-drag-ex-5.gu-mirror ul li .notification span.badge {
+  border-radius: 50px;
+  padding: 2px 6px;
+}
+body.gu-unselectable .media.el-drag-ex-5.gu-mirror ul li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.2);
+  margin-left: -26px;
+}
+body.gu-unselectable .media.el-drag-ex-5.gu-mirror .media-body h6 {
+  color: #000;
+}
+
+/*Ex -2*/
+.parent.ex-2 .dragula {
+  padding: 15px;
+}
+.parent.ex-2 .dragula .media {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+.parent.ex-2 .dragula .media img {
+  width: 45px;
+  border-radius: 50%;
+}
+.parent.ex-2 .dragula .media i {
+  font-size: 19px;
+  border-radius: 20px;
+}
+.parent.ex-2 .dragula .media .media-body h6 {
+  color: #3b3f5c;
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.parent.ex-2 .dragula .media .media-body p {
+  color: #888ea8;
+  font-size: 13px;
+  margin-top: -6px;
+}
+.parent.ex-2 #left-events .f-icon-fill {
+  display: none !important;
+  color: #e9b02b;
+}
+.parent.ex-2 #left-events .f-icon-line {
+  display: block !important;
+  color: #888ea8;
+}
+.parent.ex-2 #right-events .f-icon-fill {
+  display: block !important;
+  color: #e9b02b;
+}
+.parent.ex-2 #right-events .f-icon-line {
+  display: none !important;
+  color: #e9b02b;
+}
+
+/*Ex -3*/
+.parent.ex-3 .dragula {
+  background-color: transparent;
+  padding: 15px;
+}
+.parent.ex-3 .dragula div {
+  background-color: transparent !important;
+  padding: 0;
+  margin: 0;
+}
+.parent.ex-3 .dragula div.media {
+  border: 1px solid transparent;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+.parent.ex-3 .dragula div.media:hover {
+  border: 1px solid #f1f3f1;
+  border-radius: 4px;
+}
+.parent.ex-3 .dragula .media img {
+  width: 52px;
+  border-radius: 10%;
+}
+.parent.ex-3 .dragula .media .media-body h5 {
+  font-size: 13px;
+}
+.parent.ex-3 .dragula .media .media-body h5 span.usr-commented {
+  font-weight: 600;
+  color: #3b3f5c;
+  font-size: 14px;
+}
+.parent.ex-3 .dragula .media .media-body h5 span.comment-topic {
+  font-weight: 600;
+  color: #5247bd;
+  font-size: 13px;
+}
+.parent.ex-3 .dragula .media .media-body p.meta-time {
+  font-size: 11px;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+/*Ex -4*/
+.parent.ex-4 .dragula {
+  background-color: #fff;
+}
+.parent.ex-4 .card.post .media.user-meta {
+  padding: 10px;
+}
+.parent.ex-4 .card.post .media.user-meta img {
+  width: 50px;
+  border-radius: 50%;
+}
+.parent.ex-4 .card.post .media.user-meta .media-body h5 {
+  font-weight: 600;
+  color: #3b3f5c;
+  font-size: 17px;
+  margin-bottom: 3px;
+}
+.parent.ex-4 .card.post .media.user-meta .media-body p {
+  font-size: 11px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+.parent.ex-4 .card.post div.people-liked-post ul li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.3);
+  margin-left: -21px;
+}
+.parent.ex-4 .card.post div.people-liked-post .people-liked-post-name span {
+  vertical-align: -webkit-baseline-middle;
+  font-size: 12px;
+}
+.parent.ex-4 .card.post div.people-liked-post .people-liked-post-name span a {
+  color: #ee3d50;
+  font-weight: 600;
+  font-size: 13px;
+}
+.parent.ex-4 .card.post.text-post .card-body .post-content {
+  padding: 20px 18px;
+  color: #888ea8;
+  border-bottom: 1px solid #f1f3f1;
+}
+
+.card.post.text-post {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+
+/*Ex -5*/
+.parent.ex-5 .dragula {
+  background-color: #fff;
+}
+.parent.ex-5 .dragula div {
+  background-color: transparent !important;
+  color: #fff;
+}
+.parent.ex-5 .dragula .gu-transit {
+  background-color: transparent !important;
+  color: #fff;
+}
+.parent.ex-5 .dragula .gu-transit .media .media-body h5 {
+  color: #141471;
+  font-weight: 600;
+}
+.parent.ex-5 .dragula .gu-transit .media .media-body p {
+  color: #000;
+}
+.parent.ex-5 .dragula > div {
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+.parent.ex-5 .dragula > .gu-transit {
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 10px 0px rgba(113, 106, 202, 0.2);
+}
+.parent.ex-5 .dragula .media .media-body h5 {
+  color: #000;
+  color: #141471;
+  font-weight: 600;
+}
+.parent.ex-5 .dragula .media .media-body p {
+  color: #000;
+}
+.parent.ex-5 .handle {
+  padding: 0 9px;
+  margin-right: 5px;
+  background-color: #e9ecef;
+  border-radius: 2px;
+  color: #3b3f5c;
+  cursor: move;
+}
+.parent.ex-5 .media ul {
+  position: relative;
+}
+.parent.ex-5 .media ul li.badge-notify {
+  position: relative;
+}
+.parent.ex-5 .media ul li .notification {
+  position: absolute;
+  top: -30px;
+  left: -5px;
+}
+.parent.ex-5 .media ul li .notification span.badge {
+  border-radius: 50px;
+  padding: 2px 6px;
+}
+.parent.ex-5 .media ul li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.2);
+  margin-left: -26px;
+}
+
+@media screen and (max-width: 991px) {
+  .parent {
+    margin: 12px 0;
+    padding: 5px;
+  }
+}/*# sourceMappingURL=example.css.map */

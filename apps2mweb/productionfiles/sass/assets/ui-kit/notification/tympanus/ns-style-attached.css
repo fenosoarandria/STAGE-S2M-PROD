@@ -1,0 +1,157 @@
+@keyframes "animFlipFront" {
+  0% {
+    transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+  }
+  100% {
+    transform: perspective(1000px);
+  }
+}
+@keyframes "animFlipBack" {
+  0% {
+    transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+  }
+  100% {
+    transform: perspective(1000px);
+  }
+}
+/* Bouncy Flip adapted from animate.css by Dan Eden: http://daneden.github.io/animate.css/ */
+@keyframes "flipInX" {
+  0% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+    transition-timing-function: ease-in;
+  }
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 20deg);
+    transition-timing-function: ease-out;
+  }
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -10deg);
+    transition-timing-function: ease-in;
+    opacity: 1;
+  }
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 5deg);
+    transition-timing-function: ease-out;
+  }
+  100% {
+    transform: perspective(400px);
+  }
+}
+@keyframes "flipInXSimple" {
+  0% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+    transition-timing-function: ease-in;
+  }
+  100% {
+    transform: perspective(400px);
+  }
+}
+/* Growl-style notifications */
+.ns-attached {
+  left: 30px;
+  max-width: 300px;
+}
+
+[class^=ns-effect-].ns-attached.ns-hide {
+  animation-direction: reverse;
+}
+
+[class*=" ns-effect-"].ns-attached.ns-hide {
+  animation-direction: reverse;
+}
+
+/* Individual effects */
+/* Flip */
+.ns-effect-flip {
+  background: #00b1f4;
+  transform-origin: 50% 100%;
+  bottom: 0px;
+  font-size: 1.15em;
+  padding: 1.5em;
+  max-width: 280px;
+  backface-visibility: hidden;
+  color: #fff;
+  box-shadow: 0px 5px 20px 0 rgba(0, 0, 0, 0.3);
+}
+.ns-effect-flip .ns-close::before {
+  background: #e9ecef;
+}
+.ns-effect-flip .ns-close::after {
+  background: #e9ecef;
+}
+.ns-effect-flip .ns-close:hover::before {
+  background: #fff;
+}
+.ns-effect-flip .ns-close:hover::after {
+  background: #fff;
+}
+
+.ns-effect-flip.ns-show {
+  animation-name: animFlipFront;
+  animation-duration: 0.3s;
+}
+
+.ns-effect-flip.ns-hide {
+  animation-name: animFlipFront;
+  animation-duration: 0.3s;
+  animation-name: animFlipBack;
+}
+
+.ns-effect-bouncyflip {
+  transform-origin: 50% 0%;
+  background: #3862f5;
+  color: #fff;
+  top: 0;
+  box-shadow: 0px 5px 20px 0 rgba(0, 0, 0, 0.3);
+}
+.ns-effect-bouncyflip .icon {
+  position: absolute;
+  display: block;
+  top: 2em;
+  left: 2em;
+}
+.ns-effect-bouncyflip p {
+  padding: 0.5em 0.8em 0.8em 3.5em;
+}
+.ns-effect-bouncyflip p a {
+  color: #d3d3d3;
+}
+.ns-effect-bouncyflip .ns-close::after {
+  background: #e9ecef;
+}
+.ns-effect-bouncyflip .ns-close::before {
+  background: #e9ecef;
+}
+.ns-effect-bouncyflip .ns-close:hover::after {
+  background: #fff;
+}
+.ns-effect-bouncyflip .ns-close:hover::before {
+  background: #fff;
+}
+
+.ns-effect-bouncyflip.ns-show {
+  animation-name: flipInX;
+  animation-duration: 0.8s;
+  z-index: 1350;
+}
+
+.ns-effect-bouncyflip.ns-hide {
+  animation-name: flipInX;
+  animation-duration: 0.8s;
+  z-index: 1350;
+  animation-name: flipInXSimple;
+  animation-duration: 0.3s;
+}
+
+/*      C U S T O M      G L O B A L    C S S       */
+.ns-box-inner i {
+  font-size: 30px;
+}
+
+@media screen and (max-width: 25em) {
+  .ns-attached {
+    left: 30px;
+    max-width: none;
+    right: 30px;
+  }
+}/*# sourceMappingURL=ns-style-attached.css.map */

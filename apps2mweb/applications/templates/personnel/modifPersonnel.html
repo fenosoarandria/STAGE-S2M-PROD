@@ -1,0 +1,477 @@
+{% extends 'main.html' %}
+{% block title %}S2M-WEB | Ressources humaines{% endblock %}
+{% block content %}
+{% load custom_filters %}
+{% load static %} 
+<link href="{% static 'assets/css/elements/steps/steps.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/css/elements/steps/custom-steps.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'plugins/animate/animate.css' %}" rel="stylesheet" type="text/css" />
+<script src="{% static 'plugins/sweetalerts/promise-polyfill.js' %}"></script>
+<link href="{% static 'plugins/sweetalerts/sweetalert2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'plugins/sweetalerts/sweetalert.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/css/ui-kit/custom-sweetalert.css' %}" rel="stylesheet" type="text/css" />
+<style>
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+center {
+    display: block;
+    text-align: -webkit-center;
+    unicode-bidi: isolate;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    max-width: 60%;
+    height: auto;
+}
+
+</style>
+<div id="content" class="main-content">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="page-title">
+            </div>
+        </div>
+
+        <div class="row" id="tabindex">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                <div class="statbox widget box box-shadow"> 
+                    <div class="row layout-spacing">
+                    	<div class="col-lg-12">
+	                    	<div class="row layout-spacing">
+			                    <div class="col-lg-12">
+			                        <div class="statbox widget box box-shadow">
+			                            <div class="widget-header">
+			                                <div class="row">
+			                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+			                                        <h4>Nouveau personnel</h4>
+			                                    </div>                 
+			                                </div>
+			                            </div>
+			                            <div class="widget-content widget-content-area"> 
+											<div class="tab-content">
+												<div class="tab-pane active" id="home">
+													<div class="row">
+														<div class="col-3">
+															<h3 class="grid-title" style="color:purple;">
+															<!-- <img src="https://wallpapercave.com/wp/wp2555019.jpg" width="150" class="img-responsive" alt="Logo S2M"> -->
+															</h3>
+															<hr>
+										
+															<div class="panel panel-default">
+																<div class="panel-heading text-center">
+																	<h6 class="panel-title text-primary " style="font-weight:500; font-size:12px;">PHOTO DU PERSONNEL</h6>
+																</div>
+																<div class="panel-body">
+																	<center>
+																		<img src="{% static 'assets/photo_personnel/' %}{{ infopers.1 }}.jpg" class="img-responsive" alt="Photo du personnel" id="profilPers">
+																	</center>
+																</div>
+																<div class="panel-footer text-center">
+																	<!--<button type="button" class="btn btn-primary btn-xs"><i class="fa fa-camera"></i> Parcourir</button>-->
+																	<!-- <form action=""  method="POST" role="form" enctype="multipart/form-data" id="formPhotoPers"> -->
+																		
+																		<a href="javascript:void(0);" title="Charger la photo du personnel" id="upload_link">
+																			<i class="flaticon-display"></i> Charger la photo
+																		</a>
+																	<!-- </form> -->
+																	<!--<button type="button" class="btn btn-info" onclick="uploader_photoPers()">Exemple</button>-->
+																</div>
+															</div>											
+															<div class="panel panel-default">
+																<div class="panel-heading">
+																</div>                    
+																<!-- <div class="panel-body">                        
+																	<div class="row"> 
+																	</div>
+																</div> -->
+																<!-- <div class="panel-footer">
+																</div> -->
+															</div>
+														</div>
+														<div class="col-9">
+															<form role="form" method="POST" id="updateformPersonnel"  enctype="multipart/form-data">
+																<input id="uploadsary" type="file" name="photoDuPersonnel" style="display:none;" />
+																<!-- <input id="image" type="file" name="image"/> -->
+																<div class="row" id="row_etatCivil">
+																	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">NOM : </label>
+																					<input class="form-control text" id="txt_nom" name="nom" placeholder="" type="text" value="{{ infopers.2 }}" required>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">PRENOM : </label>
+																					<input class="form-control" id="txt_prenom" name="prenom" placeholder="" type="text" value="{{ infopers.3 }}"  required>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">N° MATRICULE : </label>
+																					<input class="form-control" id="txt_matricule" name="matricule" placeholder="" type="number" value="{{ infopers.1 }}"  min="0" required>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">N° CIN : </label>
+																					<input class="form-control" id="txt_cin" name="cin" placeholder="" value="{{ infopers.13 }}"  type="text" required>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">DELIVRANCE CIN : </label>
+																					<input class="form-control" id="txt_delivrance" name="date_cin" value="{{ infopers.14 }}"  placeholder="" type="text" required>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">VILLE RESIDENCE : </label>
+																					<input class="form-control" id="txt_villeResid" name="residence" placeholder="" value="{{ infopers.6 }}"  type="text" required>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">ADRESSE : </label>
+																					<input class="form-control" id="txt_adresse" name="adresse" placeholder="" value="{{ infopers.7 }}"  type="text" required>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">DATE DE NAISSANCE : </label>
+																					<input class="form-control" id="txt_dateNaiss" name="datenaiss" value=" "  type="date" required>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">LIEU DE NAISSANCE : </label>
+																					<input class="form-control" id="txt_lieuNaiss" name="lieunaiss"  value = "{{ infopers.10|default_if_none:'' }}"  type="text" required>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">N° TELEPHONE BUREAU : </label>
+																					<div class="input-group">
+																						<input type="text" class="form-control" id="phone1" name="txt_phoneBureau" placeholder="...">
+																						 
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">N° TELEPHONE PERSONNEL : </label>
+																					<div class="input-group">
+																						<input type="text" class="form-control" id="phone2" name="txt_phonePersonnel" value="{{ infopers.4 }}" placeholder="+241 3...">
+																						 
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">MAIL PROFESSIONNEL : </label>
+																					<div class="input-group">
+																						<input type="text" class="form-control" id="mail" name="txt_mailProf" value="{{ infopers.5|default_if_none:'' }}" placeholder="exemple@score.mg">
+																						 
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> 
+																					<div class="form-group">
+																						<label for="" style="font-size: 0.8em;;">Sexe : </label>
+																						<select name="sexe" id="sexe" class="form-control selectpicker" >
+                                                                                            {% if infopers.8 == 'Masculin'  %}
+                                                                                            <option value="0">Masculin</option>
+																							<option value="1">Féminin</option>
+                                                                                            {% else %}
+																							<option value="1">Féminin</option>
+                                                                                            <option value="0">Masculin</option>
+                                                                                            {% endif %} 
+																						</select>
+																					</div> 
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">   
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">Situation maritale : </label>
+																					<select name="situationmaritale" id="selectSituMatr" class="form-control selectpicker" >
+                                                                                        {% if infopers.15 == 'Marié'  %}
+																						<option value="1">Marié(e)</option>
+																						<option value="0">Célibataire</option>
+                                                                                        {% else %}
+																						<option value="0">Célibataire</option>
+                                                                                        <option value="1">Marié(e)</option>
+                                                                                        {% endif %} 
+																					</select>
+																				</div>
+																			</div> 
+																		</div>
+																		 
+
+																	</div>
+																</div><!--/row-formulaire-etatCivil-->
+
+																<div class="row" id="row_etatCivil">
+																	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">CONTRAT : </label>
+																					<select name="contrat" id="contrat" class="form-control selectpicker" required>
+                                                                                        {% if infopers.18 == 'CDD'  %}
+																						<option>CDD</option>
+																						<option>CDI</option>
+                                                                                        {% else %}
+																						<option>CDI</option>
+																						<option>CDD</option>
+                                                                                        {% endif %} 
+																						
+																					</select>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">CATEGORIE : </label>
+																					<select class="form-control selectpicker" name="categorie" data-live-search="true" data-size="3" tabindex="-98" required>
+											                    						<option value="{{ infopers.19 }}">{{ infopers.19 }}</option>
+                                                                                        {% for option in options  %}
+                                                                                        {% if option != infopers.19 %}
+                                                                                            <option value="{{ option }}">{{ option }}</option>
+                                                                                        {% endif %}
+                                                                                        {% endfor %}
+
+											                    					</select>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">OSTIE : </label>
+																					<input class="form-control" id="ostie" name="ostie" placeholder="" type="text" value="{{infopers.16 }}" min="0">
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">CNAPS : </label>
+																					<input class="form-control" id="cnaps" name="cnaps" placeholder="" value="{{ infopers.17 }}" type="text">
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">DATE D'EMBAUCHE : </label>
+																					<input class="form-control" id="date_embauche" name="date_embauche" value="{{ infopers.11|format_date }}" placeholder="" type="date">
+																				</div>
+																			</div>
+																			
+																		</div>
+																		<div class="row">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">LIEU DE TRAVAIL : </label>
+																					<select name="lieutravail" id="lieutravail" class="form-control selectpicker" required>
+																						<option value="{{ infopers.28 }}" selected>{{ infopers.39 }}</option>
+																						{% for lst in listcategorie %}
+                                                                                        {% if lst.0 != infopers.28 %}
+																							<option value="{{ lst.0 }}">{{ lst.1 }}</option>
+                                                                                        {% endif %}
+																						{% endfor %}
+																					</select> 
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">DIRECTION : </label>
+																					<input type="hidden" name="lead_dir" value="0">
+                                                                                    {% if infopers.34 == '1' %}
+																					<input class="check_dir" id="lead_dir" name="lead_dir" type="checkbox" value="1" checked>
+                                                                                    {% else %}
+                                                                                    <input class="check_dir" id="lead_dir" name="lead_dir" type="checkbox" value="0">
+                                                                                    {% endif %}
+																					<select name="direction" id="direction" class="form-control selectpicker" required>
+                                                                                        <option value="{{ infopers.35 }}" selected>{{ infopers.41|default_if_none:'' }}</option>
+																						{% for lst in listdirection %}
+                                                                                        {% if lst.0 != infopers.35 %}
+																							<option value="{{ lst.0 }}">{{ lst.1 }}</option>
+                                                                                        {% endif %}
+																						{% endfor %} 
+																					</select> 
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group" id="divservice">
+																					<label for="" style="font-size: 0.8em;;">SERVICE : </label>
+                                                                                    <input type="hidden" name="lead_srv" value="0">
+                                                                                    <input class="check_sexe" id="lead_srv" name="lead_srv" type="checkbox" value="1">
+                                                                                    <select name="service" id="service" class="form-control selectpicker" required>
+                                                                                        <option value="{{ infopers.31 }}" selected>{{ infopers.43|default_if_none:'' }}</option>
+                                                                                    {% for lst in service %}
+                                                                                        {% if lst.0 != infopers.31 %}
+																							<option value="{{ lst.0 }}">{{ lst.1 }}</option>
+                                                                                        {% endif %}
+																					{% endfor %} 
+                                                                                    </select>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group" id="divdepartement">
+																					<label for="" style="font-size: 0.8em;;">DEPARTEMENT : </label>
+																					<select name="departement" id="departement" class="form-control selectpicker" required>
+                                                                                        <option value="{{ infopers.45 }}" selected>{{ infopers.46|default_if_none:'' }}</option>
+                                                                                    {% for lst in departements %}
+                                                                                        {% if lst.0 != infopers.45 %}
+																							<option value="{{ lst.0 }}">{{ lst.1 }}</option>
+                                                                                        {% endif %}
+																					{% endfor %} 
+                                                                                    </select>
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">FONCTION : </label>
+																					<select name="fonction" id="fonction" class="form-control selectpicker" required>
+																						<option value="{{ infopers.36 }}" selected>{{ infopers.37|default_if_none:'' }}</option>
+																						{% for lst in fonctions %}
+                                                                                        {% if lst.0 != infopers.36 %}
+																							<option value="{{ lst.0 }}">{{ lst.1 }}</option>
+                                                                                        {% endif %}
+																						{% endfor %}
+																					</select> 
+																				</div>
+																			</div>
+																		</div>
+																	 
+																		 
+
+																	</div>
+																</div><!--/row-formulaire-etatCivil-->
+                                                                {% for lst in enfant %}
+																<div class="row" id="">
+																	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+																		<div class="row" id="enf">
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">ENFANT : </label>
+																					<input class="form-control" id="enfant-1" name="enfant-1" placeholder="NOM ET PRENOM(S)" value="{{ lst.1 }}" type="text">
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">DATE DE NAISSAINCE ENFANT: </label>
+																					<input class="form-control" id="datenaiss_enf-1" name="datenaiss_enf-1" value="{{ lst.3|format_date }}" placeholder="" type="date">
+																				</div>
+																			</div>
+																			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+																				<div class="form-group">
+																					<label for="" style="font-size: 0.8em;;">SEXE : </label>
+																					<select name="sexe_enf-1" id="sexe_enf-1" class="form-control selectpicker" >
+                                                                                        {% if lst.2 == 'Garçon'  %}
+                                                                                        <option value="0">Garçon</option>
+                                                                                        <option value="1">Fille</option>
+                                                                                        {% else %}
+                                                                                        <option value="1">Fille</option>
+                                                                                        <option value="0">Garçon</option>
+                                                                                        {% endif %} 
+																					</select>
+																				</div>
+																			</div>
+																			
+																			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+																				
+																			</div>
+																		</div>  
+																	</div>
+																</div><!--/row-formulaire-etatCivil-->
+                                                                {% endfor %}
+                                                                <div class="form-group">
+                                                                    <label for="" style="font-size: 0.8em;;">Autre(s) : </label>
+                                                                    <a href="#" class="btn btn-gradient-warning btn-rounded" id="addchild"><i class="flaticon-plus-1 mt-xl-0 mt-md-3 mt-sm-0 mt-3"></i></a>
+                                                                </div>
+																<input type="hidden" value="1" id="nbrEnfant">
+																<div >
+																	<div class="text-right" style="text-align: right!important;">
+																		<a href="/personnelRH/" class="btn btn-gradient-danger mb-3 ml-2"  onclick="document.getElementById('postForm').submit();">
+																			Annuler </a>
+																		<button type="submit" class="btn btn-gradient-success mb-3 ml-2 ">Enregistrer</button>
+																	</div>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div> 
+											</div>
+			                            </div>
+			                        </div>
+			                    </div>
+		                	</div>
+                    	</div>
+                	</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+         
+    </div>
+</div>
+
+<script src="{% static 'assets/js/libs/jquery-3.1.1.min.js' %} "></script>
+<script src="{% static 'bootstrap/js/popper.min.js' %} "></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %} "></script>
+<script src="{% static 'plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js' %} "></script>
+<script src="{% static 'plugins/sweetalerts/sweetalert2.min.js' %}"></script>
+<script src="{% static 'plugins/sweetalerts/custom-sweetalert.js' %}"></script>
+<script>
+    function submitForm() {
+        // Soumettre le formulaire lorsque le lien est cliqué
+        document.getElementById("postForm").submit();
+    }
+	$(document).ready(function(){
+		$(".nav-tabs a").click(function(){
+			$(this).tab('show');
+		});
+	});
+
+
+	$(function(){
+	    $("#upload_link").on('click', function(e){
+	        e.preventDefault();
+	        $("#uploadsary:hidden").trigger('click');
+	    });
+	    $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+	});
+</script> 
+
+<script src="{% static 'assets/js/element/steps/custom_steps.js' %} "></script>
+<script src="{% static 'assets/js/personnel.js' %}"></script>
+{% endblock %}

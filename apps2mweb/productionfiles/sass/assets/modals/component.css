@@ -1,0 +1,1713 @@
+@keyframes slit {
+  50% {
+    transform: translateZ(-250px) rotateY(89deg);
+    opacity: 1;
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateZ(0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+@keyframes rotateRightSideFirst {
+  50% {
+    transform: translateZ(-50px) rotateY(5deg);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translateZ(-200px);
+  }
+}
+@keyframes OpenTop {
+  50% {
+    transform: rotateX(10deg);
+    animation-timing-function: ease-out;
+  }
+}
+/* 
+	Main Content
+*/
+.column {
+  position: relative;
+}
+.column:nth-child(2) {
+  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.md-trigger {
+  position: relative;
+}
+
+.md-setperspective {
+  position: relative;
+}
+
+strong {
+  color: #ee3d50;
+}
+
+.md-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  max-width: 630px;
+  min-width: 320px;
+  height: auto;
+  z-index: 2000;
+  visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.md-show {
+  visibility: visible;
+}
+.md-show ~ .md-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.md-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  opacity: 0;
+  background: rgba(79, 81, 99, 0.6);
+  transition: all 0.3s;
+}
+
+/* 
+	Content styles 
+*/
+.md-content {
+  color: #fff;
+  background: #816cfd;
+  position: relative;
+  border-radius: 3px;
+  margin: 0 auto;
+}
+.md-content h3 {
+  margin: 0;
+  padding: 0.4em;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+  background: #ffffff;
+  color: #e95f2b;
+  border-radius: 3px 3px 0 0;
+}
+.md-content > div {
+  padding: 15px 40px 30px;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.15em;
+  background-color: #fff;
+  color: #3b3f5c;
+}
+.md-content > div p {
+  margin: 0;
+  padding: 10px 0;
+  color: #24ccda;
+  font-size: 15px;
+  text-align: center;
+}
+.md-content > div ul {
+  margin: 0;
+  padding: 0 0 30px 20px;
+}
+.md-content > div ul li {
+  padding: 8px 0;
+  font-size: 15px;
+}
+.md-content button {
+  display: block;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
+/*
+	Individual modal styles with animations/transitions
+*/
+/*
+	Effect 1: Fade in and scale up
+*/
+.md-effect-1 .md-content {
+  transform: scale(0.7);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.md-show.md-effect-1 .md-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/*
+	Effect 2: Slide from the right
+*/
+.md-effect-2 .md-content {
+  transform: translateX(20%);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+}
+
+.md-show.md-effect-2 .md-content {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/*
+	Effect 3: Slide from the bottom
+*/
+.md-effect-3 .md-content {
+  transform: translateY(20%);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.md-show.md-effect-3 .md-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 
+	Effect 4: Newspaper
+*/
+.md-effect-4 .md-content {
+  transform: scale(0) rotate(720deg);
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.md-show.md-effect-4 ~ .md-overlay {
+  transition: all 0.5s;
+}
+.md-show.md-effect-4 .md-content {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+/* 
+	Effect 5: fall
+*/
+.md-effect-5.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-5 .md-content {
+  transform-style: preserve-3d;
+  transform: translateZ(600px) rotateX(20deg);
+  opacity: 0;
+}
+
+.md-show.md-effect-5 .md-content {
+  transition: all 0.3s ease-in;
+  transform: translateZ(0px) rotateX(0deg);
+  opacity: 1;
+}
+
+/*
+	Effect 6: side fall
+*/
+.md-effect-6.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-6 .md-content {
+  transform-style: preserve-3d;
+  transform: translate(30%) translateZ(600px) rotate(10deg);
+  opacity: 0;
+}
+
+.md-show.md-effect-6 .md-content {
+  transition: all 0.3s ease-in;
+  transform: translate(0%) translateZ(0) rotate(0deg);
+  opacity: 1;
+}
+
+/*
+	Effect 7:  slide and stick to top
+*/
+.md-effect-7 {
+  top: 0;
+  transform: translateX(-50%);
+}
+.md-effect-7 .md-content {
+  transform: translateY(-200%);
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.md-show.md-effect-7 .md-content {
+  transform: translateY(0%);
+  border-radius: 0 0 3px 3px;
+  opacity: 1;
+}
+
+/*
+	Effect 8: 3D flip horizontal
+*/
+.md-effect-8.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-8 .md-content {
+  transform-style: preserve-3d;
+  transform: rotateY(-70deg);
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.md-show.md-effect-8 .md-content {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
+/*
+	Effect 9: 3D flip vertical
+*/
+.md-effect-9.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-9 .md-content {
+  transform-style: preserve-3d;
+  transform: rotateX(-70deg);
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.md-show.md-effect-9 .md-content {
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+
+/*
+	Effect 10: 3D sign
+*/
+.md-effect-10.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-10 .md-content {
+  transform-style: preserve-3d;
+  transform: rotateX(-60deg);
+  transform-origin: 50% 0;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.md-show.md-effect-10 .md-content {
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+
+/*
+	Effect 11: Super scaled
+*/
+.md-effect-11 .md-content {
+  transform: scale(2);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.md-show.md-effect-11 .md-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/*
+	Effect 12:  Just me
+*/
+.md-effect-12 .md-content {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s;
+  background: #fff;
+}
+.md-effect-12 .md-content h3 {
+  background: #fff;
+}
+
+.md-show.md-effect-12 ~ .md-overlay {
+  background: #4f5163;
+}
+.md-show.md-effect-12 .md-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/*
+	Effect 13: 3D slit
+*/
+.md-effect-13.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-13 .md-content {
+  transform-style: preserve-3d;
+  transform: translateZ(-3000px) rotateY(90deg);
+  opacity: 0;
+}
+
+.md-show.md-effect-13 .md-content {
+  animation: slit 0.7s forwards ease-out;
+}
+
+/*
+	Effect 14:  3D Rotate from bottom
+*/
+.md-effect-14.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-14 .md-content {
+  transform-style: preserve-3d;
+  transform: translateY(100%) rotateX(90deg);
+  transform-origin: 0 100%;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+
+.md-show.md-effect-14 .md-content {
+  transform: translateY(0%) rotateX(0deg);
+  opacity: 1;
+}
+
+/*
+	Effect 15:  3D Rotate in from left
+*/
+.md-effect-15.md-modal {
+  perspective: 1300px;
+}
+
+.md-effect-15 .md-content {
+  transform-style: preserve-3d;
+  transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+  transform-origin: 0 100%;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.md-show.md-effect-15 .md-content {
+  transform: translateZ(0px) translateX(0%) rotateY(0deg);
+  opacity: 1;
+}
+
+/*
+	Effect 16:  Blur
+*/
+.md-show.md-effect-16 ~ .md-overlay {
+  background: rgba(79, 81, 99, 0.6);
+}
+.md-show.md-effect-16 ~ .container {
+  -moz-filter: blur(3px);
+  filter: blur(3px);
+  transition: all 0.3s;
+}
+.md-show.md-effect-16 .md-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.md-effect-16 .md-content {
+  transform: translateY(-5%);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+/*
+	Effect 17:  Slide in from bottom with perspective on container
+*/
+.md-show.md-effect-17 ~ .container {
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.3s;
+  transform: rotateX(-2deg);
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+}
+.md-show.md-effect-17 ~ .md-overlay {
+  transform: rotateX(-2deg);
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+}
+.md-show.md-effect-17 .md-content {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.3s 0.2s;
+}
+
+.md-effect-17 .md-content {
+  opacity: 0;
+  transform: translateY(200%);
+}
+
+/*
+	Effect 18:  Slide from right with perspective on container
+*/
+.md-show.md-effect-18 ~ .container {
+  height: 100%;
+  overflow: hidden;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform-origin: 0% 50%;
+  -webkit-animation: rotateRightSideFirst 0.5s forwards ease-in;
+  -moz-transform-style: preserve-3d;
+  -moz-transform-origin: 0% 50%;
+  -moz-animation: rotateRightSideFirst 0.5s forwards ease-in;
+  transform-style: preserve-3d;
+  transform-origin: 0% 50%;
+  animation: rotateRightSideFirst 0.5s forwards ease-in;
+}
+.md-show.md-effect-18 ~ .md-overlay {
+  background: rgba(79, 81, 99, 0.6);
+  transition: all 0.5s;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform-origin: 0% 50%;
+  -webkit-animation: rotateRightSideFirst 0.5s forwards ease-in;
+  -moz-transform-style: preserve-3d;
+  -moz-transform-origin: 0% 50%;
+  -moz-animation: rotateRightSideFirst 0.5s forwards ease-in;
+  transform-style: preserve-3d;
+  transform-origin: 0% 50%;
+  animation: rotateRightSideFirst 0.5s forwards ease-in;
+}
+.md-show.md-effect-18 .md-content {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.5s 0.1s;
+}
+
+.md-effect-18 .md-content {
+  transform: translateX(200%);
+  opacity: 0;
+}
+
+/* 
+	Effect 19:  Slip in from the top with perspective on container
+*/
+.md-show.md-effect-19 ~ .container {
+  height: 100%;
+  overflow: hidden;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 100%;
+  -webkit-animation: OpenTop 0.5s forwards ease-in;
+  -moz-transform-style: preserve-3d;
+  -moz-transform-origin: 50% 100%;
+  -moz-animation: OpenTop 0.5s forwards ease-in;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  animation: OpenTop 0.5s forwards ease-in;
+}
+.md-show.md-effect-19 ~ .md-overlay {
+  transition: all 0.5s;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 100%;
+  -webkit-animation: OpenTop 0.5s forwards ease-in;
+  -moz-transform-style: preserve-3d;
+  -moz-transform-origin: 50% 100%;
+  -moz-animation: OpenTop 0.5s forwards ease-in;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  animation: OpenTop 0.5s forwards ease-in;
+}
+.md-show.md-effect-19 .md-content {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.5s 0.1s;
+}
+
+.md-effect-19 .md-content {
+  transform: translateY(-200%);
+  opacity: 0;
+}
+
+input[type=date]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=date]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=date]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=date]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=date]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=date]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=date]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=date][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=datetime-local]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=datetime-local]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=datetime-local]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=datetime-local]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=datetime-local]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=datetime-local]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=datetime-local]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=datetime-local][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=email]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=email]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=email]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=email]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=email]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=email]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=email]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=email][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=number]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=number]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=number]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=number]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=number]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=number]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=number]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=number][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=password]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=password]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=password]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=password]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=password]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=password]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=password]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=password][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=search-md]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=search-md]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=search-md]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=search-md]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=search-md]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=search-md]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=search-md]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=search-md][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=search]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=search]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=search]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=search]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=search]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=search]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=search]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=search][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=tel]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=tel]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=tel]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=tel]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=tel]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=tel]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=tel]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=tel][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=text]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=text]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=text]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=text]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=text]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=text]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=text]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=text][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=time]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=time]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=time]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=time]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=time]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=time]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=time]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=time][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=url]:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=url]:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+input[type=url]:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+input[type=url]:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+input[type=url]:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+input[type=url]:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+input[type=url]:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=url][readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+textarea.md-textarea {
+  overflow-y: hidden;
+  padding: 1.6rem 0;
+  resize: none;
+  min-height: 3rem;
+}
+textarea.md-textarea:disabled {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+textarea.md-textarea:disabled + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+textarea.md-textarea:focus:not([readonly]) + label {
+  color: #4285F4;
+}
+textarea.md-textarea:focus.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+textarea.md-textarea:focus.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+textarea.md-textarea:focus.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+textarea.md-textarea:focus.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+textarea.md-textarea[readonly=readonly] {
+  color: rgba(0, 0, 0, 0.46);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=date][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=datetime-local][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=email][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=number][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=password][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=search-md][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=search][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=tel][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=text][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=time][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=url][readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+textarea.md-textarea[readonly=readonly] + label {
+  color: rgba(0, 0, 0, 0.46);
+  background-color: transparent;
+}
+
+input[type=date].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=datetime-local].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=email].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=number].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=password].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=search-md].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=search].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=tel].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=text].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=time].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=url].valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+textarea.md-textarea.valid {
+  border-bottom: 1px solid #00C851;
+  box-shadow: 0 1px 0 0 #00C851;
+}
+
+input[type=date].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=datetime-local].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=email].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=number].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=password].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=search-md].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=search].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=tel].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=text].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=time].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=url].valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+textarea.md-textarea.valid + label:after {
+  content: attr(data-success);
+  color: #00c851;
+  opacity: 1;
+}
+
+input[type=date].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=datetime-local].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=email].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=number].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=password].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=search-md].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=search].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=tel].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=text].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=time].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=url].invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+textarea.md-textarea.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+input[type=date].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=datetime-local].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=email].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=number].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=password].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=search-md].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=search].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=tel].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=text].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=time].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=url].invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+textarea.md-textarea.invalid + label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[type=date] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=datetime-local] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=email] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=number] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=password] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=search-md] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=search] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=tel] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=text] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=time] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=url] + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+textarea.md-textarea + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+input[type=date].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=date].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=datetime-local].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=datetime-local].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=email].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=email].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=number].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=number].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=password].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=password].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=search-md].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=search-md].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=search].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=search].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=tel].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=tel].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=text].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=text].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=time].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=time].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+input[type=url].input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+input[type=url].input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+textarea.md-textarea.input-alternate {
+  padding: 0 15px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  border-bottom: 0;
+}
+textarea.md-textarea.input-alternate:focus:not([readonly]) {
+  border-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+label {
+  font-size: 0.8rem;
+  color: darken #ccc, 90%;
+}
+
+.md-form {
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+.md-form .btn {
+  margin-bottom: 3.5rem;
+}
+.md-form label {
+  color: #757575;
+  position: absolute;
+  top: 0.8rem;
+  left: 0;
+  font-size: 1rem;
+  cursor: text;
+  transition: 0.2s ease-out;
+}
+.md-form label.active {
+  font-size: 0.8rem;
+  transform: translateY(-140%);
+}
+.md-form .prefix {
+  position: absolute;
+  width: 3rem;
+  font-size: 2rem;
+  transition: color 0.2s;
+}
+.md-form .prefix.active {
+  color: #4285F4;
+}
+.md-form .prefix ~ input {
+  margin-left: 3rem;
+  width: 92%;
+  width: calc(100% - 4rem);
+}
+.md-form .prefix ~ textarea {
+  margin-left: 3rem;
+  width: 92%;
+  width: calc(100% - 4rem);
+  padding-top: 0.8rem;
+}
+.md-form .prefix ~ label {
+  margin-left: 3rem;
+}
+
+.form-control:focus {
+  background: 0 0;
+}
+.form-control:disabled {
+  background-color: transparent;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form-control[readonly] {
+  background-color: transparent;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.list-group-item {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+}
+
+.md-form.input-group .form-control {
+  margin: 0;
+  padding-left: 1rem;
+}
+.md-form.input-group .form-control:-moz-placeholder {
+  color: #999;
+  padding-top: 2px;
+}
+.md-form.input-group .form-control::-ms-placeholder {
+  color: #999;
+  padding-top: 2px;
+}
+.md-form.input-group .form-control::-moz-placeholder {
+  color: #999;
+  padding-top: 2px;
+}
+.md-form.input-group .form-control::placeholder {
+  color: #999;
+  padding-top: 2px;
+}
+
+.form-inline fieldset {
+  margin-right: 1.5rem;
+}
+.form-inline .form-group {
+  margin-right: 2rem;
+}
+
+.hiddendiv {
+  display: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  padding-top: 1.2rem;
+}
+
+.input-dark-bg:-moz-placeholder {
+  color: #fff !important;
+  font-weight: 300;
+}
+.input-dark-bg::-ms-placeholder {
+  color: #fff !important;
+  font-weight: 300;
+}
+.input-dark-bg::-moz-placeholder {
+  color: #fff !important;
+  font-weight: 300;
+}
+.input-dark-bg::placeholder {
+  color: #fff !important;
+  font-weight: 300;
+}
+.input-dark-bg input[type=text] {
+  border-bottom: 1px solid #fff;
+}
+.input-dark-bg .form-control {
+  color: #fff;
+}
+
+.input-light-bg:-moz-placeholder {
+  color: #1C2331 !important;
+  font-weight: 300;
+}
+.input-light-bg::-ms-placeholder {
+  color: #1C2331 !important;
+  font-weight: 300;
+}
+.input-light-bg::-moz-placeholder {
+  color: #1C2331 !important;
+  font-weight: 300;
+}
+.input-light-bg::placeholder {
+  color: #1C2331 !important;
+  font-weight: 300;
+}
+.input-light-bg input[type=text] {
+  border-bottom: 1px solid #1C2331;
+}
+.input-light-bg .form-control {
+  color: #1C2331;
+}
+
+@media screen and (max-width: 32em) {
+  body {
+    font-size: 75%;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .md-form .prefix ~ input {
+    width: 86%;
+    width: calc(100% - 3rem);
+  }
+}
+@media only screen and (max-width: 600px) {
+  .md-form .prefix ~ input {
+    width: 80%;
+    width: calc(100% - 3rem);
+  }
+}/*# sourceMappingURL=component.css.map */

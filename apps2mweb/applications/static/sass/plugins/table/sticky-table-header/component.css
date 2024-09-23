@@ -1,0 +1,103 @@
+table {
+  border-collapse: collapse;
+  margin-bottom: 3em;
+  width: 100%;
+  background: #fff;
+  color: #1d1d1d;
+}
+
+td {
+  padding: 0.75em 1.5em;
+  text-align: left;
+}
+
+th {
+  padding: 0.75em 1.5em;
+  text-align: left;
+  background-color: #816cfd;
+  border-bottom: solid 1px #fff;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+td.err {
+  background-color: #816dfd;
+  color: #fff;
+  font-size: 0.75em;
+  text-align: center;
+  line-height: 1;
+  border-radius: 4px;
+}
+
+tbody th {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+}
+tbody tr:nth-child(2n-1) {
+  background-color: #fff;
+  transition: all 0.125s ease-in-out;
+}
+tbody tr:hover {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.1);
+  color: #3862f5;
+}
+
+/* For appearance */
+.sticky-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  margin: 3em 0;
+  width: 100%;
+}
+.sticky-wrap .sticky-thead {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.125s ease-in-out;
+  z-index: 50;
+  width: auto;
+  box-shadow: 0 0.25em 0.1em -0.1em rgba(0, 0, 0, 0.125);
+  z-index: 100;
+  width: 100% !important;
+}
+.sticky-wrap .sticky-col {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.125s ease-in-out;
+  z-index: 50;
+  width: auto;
+}
+.sticky-wrap .sticky-intersect {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.125s ease-in-out;
+  z-index: 50;
+  width: auto;
+  opacity: 1;
+  z-index: 150;
+}
+.sticky-wrap td {
+  box-sizing: border-box;
+}
+.sticky-wrap th {
+  box-sizing: border-box;
+}
+
+/* Not needed for sticky header/column functionality */
+td.user-name {
+  text-transform: capitalize;
+}
+
+.sticky-wrap.overflow-y {
+  overflow-y: auto;
+  max-height: 50vh;
+}/*# sourceMappingURL=component.css.map */

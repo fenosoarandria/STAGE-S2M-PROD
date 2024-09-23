@@ -1,0 +1,121 @@
+{% extends 'main.html' %}
+{% block title %}S2M-WEB | Relevé de prix{% endblock %}
+{% block content %}
+{% load static %}
+
+<div id="content" class="main-content">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="page-title">
+                <!-- Titre de la page -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header" id="page-title">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12" >
+                            <h3 id="head"><center>RELEVE DE PRIX DES CONCURRENTS</center></h3>
+                            <hr>    
+                        </div>
+    
+                        <div class="col-xl-12 col-lg-12 col-sm-12">
+                            <!-- Debut nav -->
+                            <nav>
+                                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                    <!-- Onglet Liste Relevés -->
+                                    <a class="nav-item nav-link active" id="nav-liste-releves-tab" data-toggle="tab" href="#nav-liste-releves" role="tab" aria-controls="nav-liste-releves" aria-selected="true">LISTE RELEVES</a>
+                                    <!-- Onglet Liste Enseignes | Zones -->
+                                    <a class="nav-item nav-link" id="nav-liste-enseignes-tab" data-toggle="tab" href="#nav-liste-enseignes" role="tab" aria-controls="nav-liste-enseignes" aria-selected="false">LISTE ENSEIGNES | ZONES</a>
+                                    <!-- Onglet Liste Articles -->
+                                    <a class="nav-item nav-link" id="nav-liste-articles-tab" data-toggle="tab" href="#nav-liste-articles" role="tab" aria-controls="nav-liste-articles" aria-selected="false">LISTE ARTICLES</a>
+                                    <!-- Onglet Récapitulatifs -->
+                                    <a class="nav-item nav-link" id="nav-recapitulatifs-tab" data-toggle="tab" href="#nav-recapitulatifs" role="tab" aria-controls="nav-recapitulatifs" aria-selected="false">RECAPITULATIFS</a>
+                                    <!-- Onglet Récapitulatifs -->
+                                    {% comment %} <a class="nav-item nav-link" id="nav-nouveau-article-concurrent-tab" data-toggle="tab" href="#nav-nouveau-article-concurrent" role="tab" aria-controls="nav-nouveau-article-concurrent" aria-selected="false">NOUVEAU ARTICLE CONCURRENT</a> {% endcomment %}
+                                </div>
+                                <!-- Debut page include-->
+                                <div class="tab-content" id="nav-tabContent">
+                                    
+                                    <!-- Debut Contenu Liste Relevés -->
+                                    <div class="tab-pane fade show active" id="nav-liste-releves" role="tabpanel" aria-labelledby="nav-liste-releves-tab">
+                                        {% include 'releverprix/listes/releve.html' %}
+                                    </div>
+                                    <!-- Fin Contenu Liste Relevés -->
+
+                                    <br><br>    
+
+                                    <!--Debut Contenu Liste Enseignes | Zones -->
+                                    <div class="tab-pane fade" id="nav-liste-enseignes" role="tabpanel" aria-labelledby="nav-liste-enseignes-tab">
+                                        
+                                        <div class="nav nav-tabs" id="nav-enseignes-zones-tab" role="tablist">
+                                            <!-- Sous-onglet Liste Enseignes -->
+                                            <a class="nav-item nav-link active" id="nav-liste-enseignes-sub-tab" data-toggle="tab" href="#nav-liste-enseignes-content" role="tab" aria-controls="nav-liste-enseignes-content" aria-selected="true">LISTE ENSEIGNES</a>
+                                            <!-- Sous-onglet Liste Zones -->
+                                            <a class="nav-item nav-link" id="nav-liste-zones-sub-tab" data-toggle="tab" href="#nav-liste-zones-content" role="tab" aria-controls="nav-liste-zones-content" aria-selected="false">LISTE ZONES</a>
+                                        </div>
+                                        
+                                        <div class="tab-content mt-3" id="nav-enseignes-zones-content">
+                                            
+                                            <!-- Contenu Liste Enseignes -->
+                                            <div class="tab-pane fade show active" id="nav-liste-enseignes-content" role="tabpanel" aria-labelledby="nav-liste-enseignes-sub-tab">
+                                                {% include 'releverprix/listes/enseigne.html' %}
+                                            </div>
+                                            
+                                            <!-- Contenu Liste Zones -->
+                                            <div class="tab-pane fade" id="nav-liste-zones-content" role="tabpanel" aria-labelledby="nav-liste-zones-sub-tab">
+                                                {% include 'releverprix/listes/zone.html' %}
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <!--Fin Contenu Liste Enseignes | Zones -->
+
+                                    <!--Debut Contenu Liste Articles S2M | Concurrent -->
+                                    <div class="tab-pane fade" id="nav-liste-articles" role="tabpanel" aria-labelledby="nav-liste-articles-tab">
+    
+                                        <div class="nav nav-tabs" id="nav-articles-tab" role="tablist">
+                                            <!-- Sous-onglet Liste Articles S2M -->
+                                            <a class="nav-item nav-link active" id="nav-liste-articles-s2m-tab" data-toggle="tab" href="#nav-liste-articles-s2m-content" role="tab" aria-controls="nav-liste-articles-s2m-content" aria-selected="true">LISTE ARTICLES S2M</a>
+                                            <!-- Sous-onglet Liste Articles Concurrent -->
+                                            <a class="nav-item nav-link" id="nav-liste-articles-concurrent-tab" data-toggle="tab" href="#nav-liste-articles-concurrent-content" role="tab" aria-controls="nav-liste-articles-concurrent-content" aria-selected="false">LISTE ARTICLES CONCURRENT</a>
+                                        </div>
+                                        
+                                        <div class="tab-content mt-3" id="nav-articles-content">
+                                            
+                                            <!-- Contenu Liste Articles S2M -->
+                                            <div class="tab-pane fade show active" id="nav-liste-articles-s2m-content" role="tabpanel" aria-labelledby="nav-liste-articles-s2m-tab">
+                                                {% include 'releverprix/listes/article/s2m.html' %}
+                                            </div>
+                                            
+                                            <!-- Contenu Liste Articles Concurrent -->
+                                            <div class="tab-pane fade" id="nav-liste-articles-concurrent-content" role="tabpanel" aria-labelledby="nav-liste-articles-concurrent-tab">
+                                                {% include 'releverprix/listes/article/concurrent.html' %}
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <!--Fin Contenu Liste Articles S2M | Concurrent -->
+                                    
+                                    <!-- Contenu Récapitulatifs -->
+                                    <div class="tab-pane fade" id="nav-recapitulatifs" role="tabpanel" aria-labelledby="nav-recapitulatifs-tab">
+                                        {% include 'releverprix/recapitulatif/recap_releve_article.html' %}
+                                    </div>
+                                    
+                                    {% comment %} <!-- Contenu Nouveau Article Concurrent -->
+                                    <div class="tab-pane fade" id="nav-nouveau-article-concurrent" role="tabpanel" aria-labelledby="nav-nouveau-article-concurrent-tab">
+                                        {% include 'releverprix/listes/article/nouveau_article_concurrent.html' %}
+                                    </div>
+                                     {% endcomment %}
+                                </div>
+                                <!-- Fin page include-->
+                            </nav>
+                            <!-- Fin nav -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

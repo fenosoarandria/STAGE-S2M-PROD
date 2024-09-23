@@ -1,0 +1,308 @@
+/*== COLORS ==*/
+.social-counter {
+  padding: 10px;
+  display: block;
+}
+
+.count {
+  display: block;
+  padding: 7px 5px;
+  text-align: left;
+  transition: all 0.5s ease;
+}
+.count:hover {
+  background: rgba(0, 0, 0, 0.033);
+  transform: scale(1.055);
+}
+.count .icon {
+  background: #aaa;
+  display: inline-block;
+  float: left;
+  color: #fff;
+  font-size: 22px;
+  margin-left: 5px;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+.count .icon i {
+  display: table-cell;
+  vertical-align: middle;
+}
+.count p {
+  display: inline-block;
+  font-size: 13px;
+  color: #888;
+  margin: 11px;
+}
+.count p span {
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  padding-right: 2px;
+}
+.count .action-btn {
+  float: right;
+  display: inline-block;
+  background: #aaa;
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 11px;
+}
+
+.facebook .icon {
+  background: #1a73e9;
+}
+.facebook .icon i {
+  padding-top: 2px;
+}
+.facebook .action-btn {
+  background: #1a73e9;
+}
+
+.twitter .icon {
+  background: #00b1f4;
+}
+.twitter .icon i {
+  padding-top: 2px;
+}
+.twitter .action-btn {
+  background: #00b1f4;
+}
+
+.youtube .icon {
+  background: #e7515a;
+}
+.youtube .icon i {
+  font-size: 24px;
+}
+.youtube .action-btn {
+  background: #e7515a;
+}
+
+.google-plus .icon {
+  background: #dd4b39;
+}
+.google-plus .icon i {
+  font-size: 18px;
+  padding-top: 1px;
+}
+.google-plus .action-btn {
+  background: #dd4b39;
+}
+
+.instagram .icon {
+  background: #e4405f;
+}
+.instagram .action-btn {
+  background: #e4405f;
+}
+
+.rss .icon {
+  background: #f57d00;
+}
+.rss .action-btn {
+  background: #f57d00;
+}
+
+.social-counter-2 .linkedin {
+  background: #0077B5;
+}
+.social-counter-2 .vimeo {
+  background: #1ab7ea;
+}
+.social-counter-2 .vk {
+  background: #4c75a3;
+}
+.social-counter-2 .tumblr {
+  background: #34465d;
+}
+.social-counter-2 .pinterest {
+  background: #bd081c;
+}
+.social-counter-2 .stumbleupon {
+  background: #eb4924;
+}
+.social-counter-2 .reddit {
+  background: #ff5700;
+}
+.social-counter-2 .yelp {
+  background: #af0606;
+}
+.social-counter-2 .weibo {
+  background: #df2029;
+}
+.social-counter-2 .producthunt {
+  background: #da552f;
+}
+.social-counter-2 .whatsapp {
+  background: #25D366;
+}
+.social-counter-2 .vine {
+  background: #00b489;
+}
+.social-counter-2 .slack {
+  background: #3aaf85;
+}
+.social-counter-2 .dribbble {
+  background: #ea4c89;
+}
+.social-counter-2 .flickr {
+  background: #ff0084;
+}
+.social-counter-2 .behance {
+  background: #131418;
+}
+.social-counter-2 .foursquare {
+  background: #f94877;
+}
+.social-counter-2 .snapchat {
+  background: #FFFC00;
+}
+
+.linkedin .icon {
+  background: #0077B5;
+}
+.linkedin .action-btn {
+  background: #0077B5;
+}
+
+.vimeo .icon {
+  background: #1ab7ea;
+}
+.vimeo .action-btn {
+  background: #1ab7ea;
+}
+
+.vk .icon {
+  background: #4c75a3;
+}
+.vk .action-btn {
+  background: #4c75a3;
+}
+
+.tumblr .icon {
+  background: #34465d;
+}
+.tumblr .action-btn {
+  background: #34465d;
+}
+
+.pinterest .icon {
+  background: #bd081c;
+}
+.pinterest .action-btn {
+  background: #bd081c;
+}
+
+.stumbleupon .icon {
+  background: #eb4924;
+}
+.stumbleupon .action-btn {
+  background: #eb4924;
+}
+
+.reddit .icon {
+  background: #ff5700;
+}
+.reddit .action-btn {
+  background: #ff5700;
+}
+
+.yelp .icon {
+  background: #af0606;
+}
+.yelp .action-btn {
+  background: #af0606;
+}
+
+.weibo .icon {
+  background: #df2029;
+}
+.weibo .action-btn {
+  background: #df2029;
+}
+
+.producthunt .icon {
+  background: #da552f;
+}
+.producthunt .action-btn {
+  background: #da552f;
+}
+
+.whatsapp .icon {
+  background: #25D366;
+}
+.whatsapp .action-btn {
+  background: #25D366;
+}
+
+.vine .icon {
+  background: #00b489;
+}
+.vine .action-btn {
+  background: #00b489;
+}
+
+.slack .icon {
+  background: #3aaf85;
+}
+.slack .action-btn {
+  background: #3aaf85;
+}
+
+.dribbble .icon {
+  background: #ea4c89;
+}
+.dribbble .action-btn {
+  background: #ea4c89;
+}
+
+.flickr .icon {
+  background: #ff0084;
+}
+.flickr .action-btn {
+  background: #ff0084;
+}
+
+.behance .icon {
+  background: #131418;
+}
+.behance .icon i {
+  font-size: 18px;
+}
+.behance .action-btn {
+  background: #131418;
+}
+
+.foursquare .icon {
+  background: #f94877;
+}
+.foursquare .action-btn {
+  background: #f94877;
+}
+
+.snapchat .icon {
+  background: #FFFC00;
+}
+.snapchat .icon i {
+  font-size: 24px;
+  text-shadow: -1px 0 black, 0 -1px black, 1px 0 black, 0 1px black;
+}
+.snapchat .action-btn {
+  background: #FFFC00;
+  text-shadow: 0 0 1px black;
+  color: #000;
+}
+
+@media (max-width: 425px) {
+  .count .action-btn {
+    float: none;
+    display: table;
+  }
+}/*# sourceMappingURL=social-stats.css.map */

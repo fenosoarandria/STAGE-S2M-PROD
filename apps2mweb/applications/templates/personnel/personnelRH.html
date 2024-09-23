@@ -1,0 +1,157 @@
+{% extends 'main.html' %}
+{% block title %}S2M-WEB | Ressources humaines{% endblock %}
+{% block content %}
+{% load static %} 
+<div id="content" class="main-content">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="page-title">
+            </div>
+        </div>
+
+        <div class="row" id="tabindex">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <!-- <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-8 layout-spacing scheduled-appointments"> 
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-5 mt-2">
+                                <div class="row">
+                                    <div class="scheduled-appointments-category col-xl-2 mb-xl-0 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                        <button class="btn btn-gradient-dark btn-block">
+                                        <span class="flaticon-plus-1"></span>
+                                        Nouveau personnel</button>
+                                    </div>
+                                    <div class="scheduled-appointments-category col-xl-2 mb-xl-0 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                        <button class="btn btn-gradient-dark btn-block"><span class="flaticon-key-3"></span> Evaluation</button>
+                                    </div>
+                                    <div class="scheduled-appointments-category col-xl-2 mb-xl-0 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                        <button class="btn btn-gradient-dark btn-block"><span class="flaticon-notes-5"></span> Export congé</button>
+                                    </div>
+                                    <div class="scheduled-appointments-category col-xl-2 mb-xl-0 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                        <button class="btn btn-gradient-dark btn-block"><span class="flaticon-user-fill"></span> Enfant</button>
+                                    </div>
+                                    <div class="scheduled-appointments-category col-xl-2 mb-xl-0 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                        <button class="btn btn-gradient-dark btn-block"><span class="flaticon-share-5"></span> Liaison</button>
+                                    </div>
+                                    <div class="scheduled-appointments-category col-xl-2 mb-xl-0 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                        <button class="btn btn-gradient-dark btn-block"><span class="flaticon-plane-1"></span> Absence</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </div> -->
+                        <br>
+                         <div class="mail-chat-system">
+                            <div class="chat_window">
+                                <div class="row top_menu">
+                                    <div class="col-md-12 add-chat"> 
+                                        <div class="options float-xl-right float-md-left float-sm-right d-block">
+                                            <a href="{% url 'nouveaupers' %}"><i class="flaticon-plus-1 mt-xl-0 mt-md-3 mt-sm-0 mt-3"></i></a>
+                                            <i class="flaticon-share-4  mt-xl-0 mt-md-3 mt-sm-0 mt-3"></i>
+                                            <i class="flaticon-settings-7 mt-xl-0 mt-md-3 mt-sm-0 mt-3"></i>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div> 
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12" style="">
+                                <center>Liste des employés</center>
+                            </div>                 
+                        </div>  -->
+                    </div>
+                     <div class="row layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header"> 
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="table-responsive mb-4 style-1">
+                                    <table id="customer-info-detail-1" class="table style-1  table-bordered table-hover">
+                                        <thead>
+                                            <tr> 
+                                                <th>Matricule</th>
+                                                <th>Photo</th>
+                                                <th>Nom et prénom(s)</th>
+                                                <th>Ancienneté</th>
+                                                <th>Titre</th>
+                                                <th class="">Status</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for personnel in rows %}
+                                            <tr> 
+                                                <td class="customer-name-1">{{ personnel.1 }}</td>
+                                                <td class="">
+                                                    <a class="product-list-img" href="javascript: void(0);">
+                                                       <img src="{% static 'assets/photo_personnel/' %}{{ personnel.1 }}.jpg" alt="product">
+                                                    </a>
+                                                </td>
+                                                <td>{{ personnel.2|add:"-"|add:personnel.3}} <br><span style="color: #9da0a2; font-size: 13px;"> {{ personnel.38 }} à {{ personnel.37 }} </span></td>
+                                                <td>  {{ personnel.11 }} </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex"> {{ personnel.18 }} 
+                                                        <span style="color: red;">
+                                                            &nbsp;&nbsp; ({{ personnel.19 }})
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        {% if personnel.22 == 1 %}
+                                                        <div class=" align-self-center d-m-success  mr-1 data-marker"></div>
+                                                        <span class="label label-success">
+                                                            Actif
+                                                        {% else %}
+                                                        <div class=" align-self-center d-m-danger  mr-1 data-marker"></div>
+                                                        <span class="label label-danger">
+                                                            Non Actif
+                                                        {% endif %}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="dropdown custom-dropdown">
+                                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            <i class="flaticon-dot-three"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                                            <form id="postForm" action="{% url 'detailPersonnel' %}" method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="matricule" value="{{ personnel.1 }}">
+                                                                <button  class="dropdown-item" type="submit">Visualiser</button>
+                                                            </form>
+                                                            <a class="dropdown-item" href="javascript:void(0);">Désaciver</a>
+                                                            <form id="postForm" action="{% url 'modifPersonnel' %}" method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="matricule" value="{{ personnel.1 }}">
+                                                                <button  class="dropdown-item" type="submit">Modifier</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>  
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+</div>
+
+<script>
+    function submitForm() {
+        // Soumettre le formulaire lorsque le lien est cliqué
+        document.getElementById("postForm").submit();
+    }
+</script>
+{% endblock %}

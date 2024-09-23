@@ -1,0 +1,31 @@
+span.instafilta-target {
+  position: relative;
+  display: block;
+  padding: 10px;
+  margin: 0 auto;
+  height: 130px;
+  text-align: center;
+  margin-bottom: 1.5rem !important;
+}
+span.instafilta-target:hover .fa {
+  color: #3862f5;
+  border: 1px solid #f1f3f1;
+}
+span.instafilta-target:hover span {
+  color: #3862f5;
+}
+
+.fa {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 25px;
+  border: 1px solid #f1f3f1;
+  padding: 17px 0 0 0;
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 65px;
+  height: 65px;
+  color: #888ea8;
+  box-shadow: 0px 3px 25px 0px rgba(113, 106, 202, 0.2);
+}/*# sourceMappingURL=custom-fontawesome_icon.css.map */
