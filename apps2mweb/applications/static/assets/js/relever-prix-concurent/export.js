@@ -266,6 +266,16 @@ function generatePdfEnseigne() {
 function generatePdfZone() {
     generatePdf('/releveprix/pdf-zone/', 'rapport_zone.pdf', '');
 }
+// // Fonction pour générer le PDF Detail releve
+// function generatePdfDetailReleve() {
+//     const selecteur = ['num_releve'];
+//     const params = new URLSearchParams();
+//     selecteur.forEach(id => {
+//         const value = document.getElementById(id).value;
+//         if (value) params.append(id, value);
+//     });
+//     generatePdf('/releveprix/pdf-detail-releve/', 'detail_releve.pdf', params.toString());
+// }
 
 // Fonction pour générer le PDF avec filtres sur les relevés
 function generatePdfFilterReleve() {

@@ -100,6 +100,9 @@ urlpatterns = [
     path('releveprix/import-releve/', RelReleveView.import_excel_releve, name='import_excel'),
     path('releveprix/import-releve-concurrent/', RelArtConcurView.import_excel_releve_concurrent, name='import_excel_releve_concurrent'),
     path('releveprix/import-rattachement-article-exel/', RelArtConcurView.import_rattachement_concurrent_exel, name='import_rattachement_concurrent_exel'),
+    path('releveprix/import-rattachement-concurrent-exel/', RelArtConcurView.import_rattachement_s2m_en_concurrent_exel, name='import_rattachement_s2m_en_concurrent_exel'),
+    
+    
     #Delete
     path('releveprix/delete-releve/', IndexReleve.delete_releve, name='delete_releve'),
     #Update
@@ -124,6 +127,7 @@ urlpatterns = [
     path('releveprix/pdf-filtre-releve/', Export.generate_pdf_from_filter_releve, name='generate_pdf_from_filter_releve'),
     path('releveprix/pdf-releve-modal/', Export.generate_pdf_from_releve_modal, name='generate_pdf_from_releve_modal'),
     path('releveprix/pdf-article-rattache/', Export.generate_pdf_from_rattachement_article, name='generate_pdf_from_rattachement_article'),
+    # path('releveprix/pdf-detail-releve/', Export.generate_pdf_from_detail_releve, name='generate_pdf_from_detail_releve'),
 
     
     #--------------------------------FENOSOA--------------------------------------

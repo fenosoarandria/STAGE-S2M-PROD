@@ -9,6 +9,7 @@ from applications.view.releverprix.EnseigneView import liste_enseigne
 from applications.view.releverprix.IndexReleve import applique_filtre_releve, liste_releve
 from applications.view.releverprix.RecapRelArticle import applique_filtre_recap
 from applications.view.releverprix.RelArtConcurView import filtre_article_concurrent, select_by_ref_art_concu
+from applications.view.releverprix.RelReleveView import select_by_id_releve_index
 from applications.view.releverprix.ZoneView import liste_zone
 from applications.view.releverprix.helper.date_format import format_date
 
@@ -229,3 +230,4 @@ def generate_pdf_from_rattachement_article(request):
             print(f"Erreur lors de la génération du PDF : {e}")
             return JsonResponse({'error': 'Erreur lors de la génération du PDF.'}, status=500)
     return JsonResponse({'error': 'Méthode non autorisée.'}, status=405)
+

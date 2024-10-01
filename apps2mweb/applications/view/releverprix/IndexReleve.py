@@ -4,7 +4,6 @@ from django.db import connections
 from django.shortcuts import render, get_object_or_404
 from applications.model.releverprix.base_mysql.Enseigne import Enseigne
 from applications.model.releverprix.base_mysql.IndexReleve import IndexReleve
-from applications.model.releverprix.base_mysql.RelArtNouveau import RelArtNouveau
 from applications.model.releverprix.base_mysql.RelReleve import RelReleve
 from applications.model.releverprix.base_mysql.Zone import Zone
 from datetime import datetime
@@ -28,9 +27,8 @@ def index(request):
         'fournisseur': Fournisseur.objects.using('sifaka-postgres').values('id_frs', 'raison_social_frs'),
     }
     return render(request, 'releverprix/index.html', context)
-
-
 # ----------------------------------Listes relevé------------------------------------------------------------------------
+
 def liste_releve(request):
     sql_query = '''
     SELECT 

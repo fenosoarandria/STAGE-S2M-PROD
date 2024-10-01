@@ -6,6 +6,7 @@ let filteredDataEnseigne=[]
 let filteredDataZone=[]
 let filteredDataReleveArticle=[]
 let filteredDataReleveArticleRattache=[]
+let currentSlide = 0; // Déclaration de currentSlide au niveau global
 
 
 function Enseigne() {
@@ -221,6 +222,7 @@ function DetailReleve(itemId) {
     
     // Stocker la valeur avec une clé dynamique
     sessionStorage.setItem('num_releve', itemId);
+    showLoadingSpinner('#loading_detail_releve', true);
    
     fetch('/releveprix/liste-detail-releve/', {
         method: 'POST',
@@ -247,7 +249,6 @@ function DetailReleve(itemId) {
             const prixRef = item.prix_ref_rel != null ? item.prix_ref_rel : '0';
             const prixZone = item.prix_zone_rel != null ? item.prix_zone_rel :'0';
             const prixConcurrent = item.prix_concur_rel != null ? item.prix_concur_rel: '0';
-
 
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -283,6 +284,8 @@ function DetailReleve(itemId) {
             row.innerHTML = '<td colspan="12">Aucune donnée disponible</td>';
             tableBody.appendChild(row);
         }
+        showLoadingSpinner('#loading_detail_releve', false);
+
         // Configure pagination
         const paginationDetailReleve = paginateTable('table-detail-releve', 'pagination-detail-releve', 4);
         setupSearch('searchDetailReleveInput', 'table-detail-releve', paginationDetailReleve);
@@ -290,6 +293,7 @@ function DetailReleve(itemId) {
     })
     .catch(error => console.error('Erreur:', error));
 }
+
 
 function InfoArticleReleve(button) {
     const itemRefRel = button.getAttribute('data-ref_rel');
@@ -306,13 +310,16 @@ function InfoArticleReleve(button) {
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
         },
-        body: new URLSearchParams({ ref_rel: itemRefRel,id_rel_rel: itemIdRelRel,num_rel_rel:itemNumRelRel})
+        body: new URLSearchParams({ ref_rel: itemRefRel, id_rel_rel: itemIdRelRel, num_rel_rel: itemNumRelRel })
     })
     .then(response => response.json())
     .then(data => {
-        data.data.forEach(row => {
+        // Réinitialiser le carrousel
+        const carouselImages = document.querySelector('.carousel-images');
+        carouselImages.innerHTML = ''; // Vider le contenu actuel
+
+        data.data.forEach((row, index) => {
             // Mise à jour des champs dans le modal
-            //S2M
             document.querySelector('#modifierDetailReleveModal #id_rel_rel').value = row.id_rel_rel;
             document.querySelector('#modifierDetailReleveModal #dateInput').value = row.date_rel;
             document.querySelector('#modifierDetailReleveModal #releveNumberInput').value = row.num_rel_rel;
@@ -321,7 +328,8 @@ function InfoArticleReleve(button) {
             document.querySelector('#modifierDetailReleveModal #s2mGencode').value = row.gencod_rel;
             document.querySelector('#modifierDetailReleveModal #s2mPrix').value = row.prix_ref_rel;
             document.querySelector('#modifierDetailReleveModal #s2mZone').value = row.lib_zn_rel;
-            //CONCURRENT
+
+            // Concurrent
             document.querySelector('#modifierDetailReleveModal #id_concurrent').value = row.id_concurrant;
             document.querySelector('#modifierDetailReleveModal #concurrentReference').value = row.num_rel_rel;
             document.querySelector('#modifierDetailReleveModal #concurrentLibelle').value = row.lib_art_concur_rel;
@@ -329,35 +337,35 @@ function InfoArticleReleve(button) {
             document.querySelector('#modifierDetailReleveModal #concurrentPrix').value = row.prix_concur_rel;
             document.querySelector('#modifierDetailReleveModal #concurrentAutre').value = row.lib_plus_rel;
             concurrent.innerHTML = row.libelle_ens;
-            // Trouve l'élément où tu veux insérer l'image
-            // Crée l'URL de l'image
-            const imageUrl = `/static/img/Nouveau_article/${row.gc_concur_rel}.png`;
 
-            // Trouve l'élément où tu veux insérer l'image
-            const conteneur = document.querySelector('#conteneurImage');
+             // Réinitialiser le carrousel
+        const carouselImages = document.querySelector('.carousel-images');
+        carouselImages.innerHTML = ''; // Vider le contenu actuel
 
-            // Insère le code HTML de l'image dans le conteneur
-            conteneur.innerHTML = `
-                <style>
-                    #articlePhoto:hover {
-                        transform: scale(1.1);
-                    }
-                </style>
-                <img src="${imageUrl}" 
-                    alt="Photo de l'article" 
-                    id="articlePhoto" 
-                    class="img-fluid" 
-                    style="max-width: 100%; transition: transform 0.3s ease-in-out; cursor: pointer;">
-            `;
+        // Insérer les images dans le carrousel
+        data.data.forEach((row) => {
+            const images = row.images; // Supposons que row.images est un tableau d'URLs d'images
 
+            images.forEach((imageUrl, imgIndex) => {
+                carouselImages.innerHTML += `
+                    <div class="slide_releve ${imgIndex === 0 ? 'active' : ''}">
+                        <img src="${imageUrl}" 
+                              alt="Image de l'article" class="d-block " style="height: auto;">
+                    </div>
+                `;
+            });
+        });
 
-
+        // Afficher la première image
+        showSlide(currentSlide);
         });
     })
     .catch(error => {
         console.error('Erreur lors de la requête fetch:', error);
     });
 }
+
+
 
 function RattachementReleve(itemId,s2m) {
     sessionStorage.setItem("reference",itemId)
@@ -443,10 +451,6 @@ function HistoriqueReleve(itemId) {
         tableBody.innerHTML = ''; // Nettoyer le tableau existant
         const validation = '';
         data.data.forEach(item => {
-            console.log(data)
-            // if (item.date_val_releve != null){
-            //     validation = item.date_val_releve;
-            // }
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${ item.date_rel }</td>

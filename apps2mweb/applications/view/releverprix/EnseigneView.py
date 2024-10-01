@@ -20,10 +20,9 @@ def liste_enseigne(request):
     except Exception as e:
         # Retourne une réponse d'erreur JSON en cas d'exception
         return JsonResponse({'error': str(e)}, status=500)
-
-
-
 # ----------------------------------Insertion de l'enseigne------------------------------------------------------------------------
+
+
 @csrf_exempt
 def ajout_enseigne(request):
     if request.method == 'POST':
@@ -58,8 +57,8 @@ def ajout_enseigne(request):
         return JsonResponse({'success': False, 'message': 'Requête non valide.'})
 
 
-
 # ----------------------------------Modification enseigne------------------------------------------------------------------------
+
 @csrf_exempt
 def update_enseigne(request, id):
     

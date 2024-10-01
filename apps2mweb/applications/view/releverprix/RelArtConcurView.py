@@ -7,11 +7,16 @@ from django.views.decorators.csrf import csrf_exempt
 from applications.model.releverprix.base_mysql.RelArtConcur import RelArtConcur
 from applications.view.releverprix import RelReleveView
 from applications.view.releverprix.PersonnelPView import select_by_id_personnel
-from applications.view.releverprix.RelArtImageView import get_image_url
+from applications.view.releverprix.RelArtImageView import  get_image_urls_concurrent_verif
 from applications.view.releverprix.RelLogView import historique
 from applications.view.releverprix.ZoneView import select_by_id_zone
 from applications.view.releverprix.helper.manage_index import  manage_indexes_rattachement, manage_indexes_releve
 from django.db import connections, transaction
+import os
+from django.http import JsonResponse
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+
 
 # --------------------------------------Selecter by reference article concurrent ----------------------------------------------------------------------
 @csrf_exempt
@@ -48,10 +53,6 @@ def select_by_ref_art_concu(request):
 
 # -------------------------------------- Filtration des articles concurren ----------------------------------------------------------------------
 
-import os
-from django.http import JsonResponse
-from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def filtre_article_concurrent(request):
@@ -79,7 +80,6 @@ def filtre_article_concurrent(request):
         c.enseigne_ac = %s AND c.etat = %s
     '''
 
-    # Exécution de la requête SQL
     try:
         with connections['default'].cursor() as cursor:
             cursor.execute(sql_query, [enseigne, rattachement])
@@ -92,54 +92,16 @@ def filtre_article_concurrent(request):
             # Parcourir les résultats pour ajouter l'URL de l'image
             for row in rows:
                 result_dict = dict(zip(columns, row))
-                result_dict['image'] = get_image_url(result_dict['gc_concur_rel'])  # Appel à la fonction pour vérifier l'image
+                # Appel à la fonction pour vérifier l'image (récupérer plusieurs images)
+                result_dict['images'] = get_image_urls_concurrent_verif(result_dict['id_art_concur'])
                 results.append(result_dict)
 
-        # Retourner les données sous forme de JSON
         return JsonResponse({'data': results}, safe=False)
     except Exception as e:
         print(f"Erreur lors de la récupération des articles concurrents: {e}")
         return JsonResponse({'error': 'Erreur lors de la récupération des données'}, status=500)
 
-def get_image_url(gc_concur_rel):
-    """ Vérifie si l'image existe dans le répertoire et retourne l'URL correspondante """
-    image_name = f'{gc_concur_rel}.png'
-    image_path = os.path.join(settings.BASE_DIR, 'applications/static', 'img', 'Nouveau_article', image_name)
-    print(image_path)
-    if os.path.exists(image_path):
-        return f'/static/img/Nouveau_article/{image_name}'
-    else:
-        return '/static/img/Nouveau_article/vide.png'
 
-# @csrf_exempt
-# def filtre_article_concurrent(request):
-#     enseigne = request.POST.get('ens_id')
-#     rattachement = request.POST.get('rattachement')
-#     # Concaténation directe des valeurs dans la requête SQL (moins sécurisé)
-#     sql_query = f'''
-    
-#     SELECT c.enseigne_ac,r.ref_rel,c.libelle_ac as lib_art_concur_rel,c.gencod_ac as gc_concur_rel,r.prix_concur_rel,c.etat as statut_rattachement
-#         FROM rel_releve r
-#         JOIN rel_index_releve ON r.num_rel_rel = rel_index_releve.id_releve
-#         JOIN rel_enseigne ON rel_index_releve.enseigne_releve = rel_enseigne.enseigne_ens
-#         JOIN rel_art_concur c ON r.ref_rel = c.ref_ac
-#         WHERE c.enseigne_ac = '{enseigne}' AND c.etat = '{rattachement}' 
-#     '''
-#         # SELECT ref_rel,lib_art_concur_rel,gc_concur_rel,prix_concur_rel,rel_releve.dt_maj_releve,rel_releve.statut_rattachement
-#         # FROM rel_releve
-#         # JOIN rel_index_releve ON rel_releve.num_rel_rel = rel_index_releve.id_releve
-#         # JOIN rel_enseigne ON rel_index_releve.enseigne_releve = rel_enseigne.enseigne_ens
-#         # WHERE rel_enseigne.enseigne_ens = '{enseigne}'AND statut_rattachement = '{rattachement}' 
-#     # Exécuter la requête SQL
-#     with connections['default'].cursor() as cursor:
-#         cursor.execute(sql_query)
-#         rows = cursor.fetchall()
-
-#         # Convertir les résultats en une liste de dictionnaires
-#         columns = [col[0] for col in cursor.description]
-#         results = [dict(zip(columns, row)) for row in rows]
-
-#     return JsonResponse({'data': results}, safe=False)
 
 # -------------------------------------- Select relever art concur by id enseigne ----------------------------------------------------------------------
 def get_rel_art_concur_data(enseigne_ac):
@@ -243,25 +205,99 @@ def import_rattachement_concurrent_exel(request):
         with transaction.atomic():
             batch_data = []
             for _, row in data.iterrows():
-                batch_data.append((
-                    row['NUMERO_ENSEIGNE'], row['REF_S2M'], row['LIB_CONC'], 
-                    row['GEN_CONC'], 1, request.session.get('nummatr') # Remplacez 'user' par l'utilisateur réel si disponible
-                ))
-
+                if not check_existing_article_concurrent(row['NUMERO_ENSEIGNE'], row['REF_S2M'], row['LIB_CONC'], row['GEN_CONC']):
+                    batch_data.append((
+                        row['NUMERO_ENSEIGNE'], row['REF_S2M'], row['LIB_CONC'], 
+                        row['GEN_CONC'], 1, request.session.get('nummatr') # Remplacez 'user' par l'utilisateur réel si disponible
+                    ))
             insertion_rel_art_concur(batch_data)  # Insérer en lot pour améliorer la performance
+            
             data = [
                 (request.session.get('nummatr'), "Ajout ", f" {personnel[1]} {personnel[2]} a ajouter des rattachements par importatione exel")
             ]
             historique(data)
         manage_indexes_rattachement('drop')  # Supprimer les index après l'insertion
-
-        return JsonResponse({'data': 'Fichier importé avec succès', 'rows': num_rows})
-
+        return JsonResponse({'success': True, 'message': 'Fichier importé avec succès.'})
     except Exception as e:
-        return JsonResponse({'data': f'Erreur lors de l\'importation: {str(e)}'}, status=500)
+        return JsonResponse({'danger': False, 'message': f'Erreur lors de l\'importation: {str(e)}'})
+    
+    
+# -------------------------------------- Import rattachement des articles concurrent ----------------------------------------------------------------------
+@csrf_exempt
+def import_rattachement_s2m_en_concurrent_exel(request):
+    personnel = select_by_id_personnel(request.session.get('nummatr'))
+    
+    if request.method != 'POST':
+        return JsonResponse({'data': 'Méthode non autorisée'}, status=405)
+    
+    excel_file = request.FILES.get('importExcelRattachementConcurrent')
+    if not excel_file:
+        return JsonResponse({'data': 'Aucun fichier reçu'}, status=400)
+    
+    file_extension = excel_file.name.split('.')[-1].lower()
+    try:
+        # Lire le fichier sans en-tête
+        if file_extension == 'csv':
+            df = pd.read_csv(excel_file, header=None)
+        elif file_extension in ['xls', 'xlsx']:
+            df = pd.read_excel(excel_file, header=None)
+        else:
+            return JsonResponse({'data': 'Format de fichier non pris en charge'}, status=400)
+
+        df.columns = ['NUMERO_ENSEIGNE', 'REF_S2M', 'LIB_CONC', 'GEN_CONC']
+        data = df[['NUMERO_ENSEIGNE', 'REF_S2M', 'LIB_CONC', 'GEN_CONC']].fillna('')
+        
+        manage_indexes_rattachement('create')  # Créer les index avant l'insertion
+
+        with transaction.atomic():
+            for _, row in data.iterrows():
+                
+                # Si l'article n'existe pas, insérer
+                id_art_concur = update_rattachement_s2m_concurrent(row['NUMERO_ENSEIGNE'], row['REF_S2M'],row['GEN_CONC'])
+                RelReleveView.update_rel_releve_etat_rattachement_nouveau(id_art_concur)
+
+            data = [
+                (request.session.get('nummatr'), "Ajout ", f" {personnel[1]} {personnel[2]} a ajouter des rattachements par importatione exel")
+            ]
+            historique(data)
+        manage_indexes_rattachement('drop')  # Supprimer les index après l'insertion
+        return JsonResponse({'success': True, 'message': 'Fichier importé avec succès.'})
+    except Exception as e:
+        return JsonResponse({'danger': False, 'message': f'Erreur lors de l\'importation: {str(e)}'})
     
     
     
+    
+    
+def update_rattachement_s2m_concurrent(enseigne_ac, reference, gencode):
+    with connections['default'].cursor() as cursor:
+        # Récupérer l'ID correspondant avant la mise à jour
+        cursor.execute("""
+            SELECT id_art_concur
+            FROM rel_art_concur
+            WHERE enseigne_ac = %s 
+              AND gencod_ac = %s
+        """, [enseigne_ac, gencode])
+        id_updated = cursor.fetchone()  # Récupère la première ligne
+
+        # Si un ID est trouvé, faire l'update
+        if id_updated:
+            cursor.execute("""
+                UPDATE rel_art_concur
+                SET ref_ac = %s,
+                    etat = 1
+                WHERE enseigne_ac = %s 
+                  AND gencod_ac = %s
+            """, [reference, enseigne_ac, gencode])
+            
+            rows_updated = cursor.rowcount  # Nombre de lignes mises à jour
+
+            # Vérifier si l'update a affecté des lignes
+            if rows_updated > 0:
+                return id_updated[0]  # Retourne l'ID mis à jour
+    
+    return None  # Retourne None si aucun ID n'a été trouvé ou mis à jour
+
 # -------------------------------------- Import nouveau concurrent non rattacher ----------------------------------------------------------------------
 @csrf_exempt
 def import_excel_releve_concurrent(request):
@@ -309,12 +345,14 @@ def import_excel_releve_concurrent(request):
             # Historique de l'action
             historique([(request.session.get('nummatr'), "Creation", f"{personnel[1]} {personnel[2]} a ajouté des articles concurrents non rattachés ")])
             manage_indexes_releve('drop')
+        return JsonResponse({'success': True, 'message': 'Fichier importé avec succès.'})
 
-        return JsonResponse({'data': 'Fichier importé avec succès', 'rows': len(data)})
+        # return JsonResponse({'data': 'Fichier importé avec succès', 'rows': len(data)})
 
     except Exception as e:
         print(e)
-        return JsonResponse({'data': f'Erreur lors de l\'importation: {str(e)}'}, status=500)
+        return JsonResponse({'danger': False, 'message': f'Erreur lors de l\'importation: {str(e)}'})
+        # return JsonResponse({'data': f'Erreur lors de l\'importation: {str(e)}'}, status=500)
 
 
 # -------------------------------------- Verification si un article concurrent existe deja ----------------------------------------------------------------------

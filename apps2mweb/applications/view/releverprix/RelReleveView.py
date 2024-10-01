@@ -7,11 +7,11 @@ import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 from applications.view.releverprix import ArticleView
 from applications.view.releverprix.PersonnelPView import select_by_id_personnel
+from applications.view.releverprix.RelArtImageView import get_image_urls_concurrent_verif
 from applications.view.releverprix.RelLogView import historique
 from applications.view.releverprix.helper.manage_index import  manage_indexes_releve
 
 
-# ----------------------------------Selection de relevé par id------------------------------------------------------------------------
 @csrf_exempt
 def select_by_id_releve_index(request):
     id = request.POST.get('id')
@@ -20,9 +20,11 @@ def select_by_id_releve_index(request):
         return JsonResponse({'data': []}, safe=False)
     
     sql_query = '''
-        SELECT * FROM rel_releve r JOIN rel_etat et ON r.etat_rel = et.rel_etat_code JOIN rel_etat_art eta ON r.etat_sup_conc = eta.code_rel_sup
-        WHERE 
-        r.num_rel_rel = %s ORDER BY r.ref_rel ASC
+        SELECT * 
+        FROM rel_releve r
+        JOIN rel_etat et ON r.etat_rel = et.rel_etat_code
+        JOIN rel_etat_art eta ON r.etat_sup_conc = eta.code_rel_sup
+        WHERE r.num_rel_rel = %s
     '''
     params = [id]
     
@@ -44,7 +46,8 @@ def select_by_id_releve_index(request):
 
 
 
-# ----------------------------------Selection de relevé par reference------------------------------------------------------------------------
+
+
 @csrf_exempt
 def select_by_ref_releve_index(request):
     ref_rel = request.POST.get('ref_rel')
@@ -64,9 +67,22 @@ def select_by_ref_releve_index(request):
 
         # Convertir les résultats en une liste de dictionnaires
         columns = [col[0] for col in cursor.description]
-        results = [dict(zip(columns, row)) for row in rows]
+        # results = [dict(zip(columns, row)) for row in rows]
+        
+        # # Colonnes de la requête SQL
+        # columns = [col[0] for col in cursor.description]
+        results = []
+
+        # Parcourir les résultats pour ajouter l'URL de l'image
+        for row in rows:
+            result_dict = dict(zip(columns, row))
+            # Appel à la fonction pour vérifier l'image (récupérer plusieurs images)
+            result_dict['images'] = get_image_urls_concurrent_verif(result_dict['id_art_conc_rel'])
+            results.append(result_dict)  
 
     return JsonResponse({'data': results}, safe=False)
+
+
 
 
 # --------------------------------------Update informationpar article concurrent----------------------------------------------------------------------
@@ -117,6 +133,9 @@ def update_information_article_concurrent(request):
     return JsonResponse({'success': False, 'message': 'Méthode non autorisée.'})
 
 
+
+
+
 # -------------------------------------- Historique des releves par article ----------------------------------------------------------------------
 @csrf_exempt
 def historique_releve_article(request):
@@ -138,6 +157,9 @@ def historique_releve_article(request):
         results = [dict(zip(columns, row)) for row in rows]
 
     return JsonResponse({'data': results}, safe=False)
+
+
+
 
 
 # -------------------------------------- Insertion nouveau releve ----------------------------------------------------------------------       
@@ -163,6 +185,9 @@ def insertion_releve(data):
         cursor.executemany(insert_query, values)
         return len(values)
     
+    
+    
+    
 # -------------------------------------- Modification relever (rattachement des articles deja rattacher ) ----------------------------------------------------------------------
 def update_rel_releve(enseigne_ac, reference, num_rel_rel):
     with connections['default'].cursor() as cursor:
@@ -171,17 +196,20 @@ def update_rel_releve(enseigne_ac, reference, num_rel_rel):
             JOIN rel_art_concur ON rel_releve.ref_rel = rel_art_concur.ref_ac
             SET rel_releve.id_art_conc_rel = rel_art_concur.id_art_concur,
                 rel_releve.lib_art_concur_rel = rel_art_concur.libelle_ac,
-                rel_releve.gc_concur_rel = rel_art_concur.gencod_ac,
-                statut_rattachement = 1
+                rel_releve.gc_concur_rel = rel_art_concur.gencod_ac
             WHERE rel_art_concur.enseigne_ac = %s 
               AND rel_releve.ref_rel = %s 
               AND rel_releve.num_rel_rel = %s
         """, [enseigne_ac, reference, num_rel_rel])
         
+                # statut_rattachement = 1
         # Récupérer le nombre de lignes mises à jour
         rows_updated = cursor.rowcount
     
     return rows_updated
+      
+      
+      
         
 # -------------------------------------- Modification relever (rattachement des articles deja rattacher ) ----------------------------------------------------------------------
 staticmethod     
@@ -197,6 +225,9 @@ def update_rel_releve_etat_rattachement(ref_ac,gencode):
             WHERE rel_releve.ref_rel = %s
             AND rel_releve.gencod_rel = %s
         """, [ref_ac,gencode])
+
+
+
 
 
 # -------------------------------------- Import exel de releve ----------------------------------------------------------------------
@@ -257,16 +288,7 @@ def import_excel_releve(request):
     except Exception as e:
         return JsonResponse({'data': f'Erreur lors de l\'importation: {str(e)}'}, status=500)
     
-
-
-# --------------------------------------  Voir si l'article existe deja) ----------------------------------------------------------------------
-def check_existing_article(reference, gencode, libelle, enseigne):
-    return RelReleve.objects.filter(
-        ref_rel=reference,
-        gencod_rel=gencode,
-        libelle_art_rel=libelle,
-        num_rel_rel__enseigne_releve__enseigne_ens=enseigne
-    ).exists()
+    
     
 
 def select_by_reference(ref):
@@ -283,6 +305,9 @@ def select_by_reference(ref):
             # Conversion du tuple en dictionnaire
             return dict(zip(columns, row))
         return None
+    
+    
+    
     
 def update_s2m_attributs(ref, data, id_concurrent, faux_ref):
     # Récupérer l'instance de la connexion
@@ -317,43 +342,31 @@ def update_s2m_attributs(ref, data, id_concurrent, faux_ref):
         # Retourner le nombre de lignes affectées
         return cursor.rowcount
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-# def check_existing_article(reference, gencode, libelle, enseigne):
-#     """
-#     Vérifie si l'article avec la référence, le gencode, le libellé et l'enseigne existe déjà 
-#     avec toutes les colonnes nécessaires remplies en utilisant une requête SQL brute.
-#     Retourne True si toutes les colonnes sont présentes, False sinon.
-#     """
-#     with connection.cursor() as cursor:
-#         query = """
-#             SELECT EXISTS (
-#                 SELECT 1 FROM rel_releve
-#                 JOIN rel_index_releve ON rel_releve.num_rel_rel = rel_index_releve.id_releve
-#                 JOIN rel_enseigne ON rel_index_releve.enseigne_releve = rel_enseigne.enseigne_ens
-#                 WHERE rel_releve.ref_rel = %s
-#                     AND gencod_rel = %s
-#                     AND libelle_art_rel = %s
-#                     AND rel_enseigne.enseigne_ens = %s
-#             )
-#         """
-#         cursor.execute(query, [reference, gencode, libelle, enseigne])
-#         exists = cursor.fetchone()[0]
-    
-#     return exists
+      
+      
+      
+# --------------------------------------  Voir si l'article existe deja) ----------------------------------------------------------------------
+def check_existing_article(reference, gencode, libelle, enseigne):
+    return RelReleve.objects.filter(
+        ref_rel=reference,
+        gencod_rel=gencode,
+        libelle_art_rel=libelle,
+        num_rel_rel__enseigne_releve__enseigne_ens=enseigne
+    ).exists()
+
+
+
+
+# -------------------------------------- Modification relever (rattachement nouveau ) ----------------------------------------------------------------------
+staticmethod     
+def update_rel_releve_etat_rattachement_nouveau(id_art_concur):
+    with connections['default'].cursor() as cursor:
+        cursor.execute("""
+            UPDATE rel_releve
+            JOIN rel_art_concur ON rel_releve.id_art_conc_rel = rel_art_concur.id_art_concur
+            SET rel_releve.ref_rel = rel_art_concur.ref_ac,
+                rel_releve.libelle_art_rel = rel_art_concur.libelle_ac,
+                rel_releve.gencod_rel = rel_art_concur.gencod_ac,
+                statut_rattachement = 1
+            WHERE rel_releve.id_art_conc_rel = %s
+        """, [id_art_concur])

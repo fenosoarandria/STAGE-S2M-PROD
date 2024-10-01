@@ -53,20 +53,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'apps2mweb.middleware.CheckCookieMiddleware',
 ]
-
-
-#Mialivola no nanisy an'io
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Utilisation de la base de données pour stocker les sessions
-SESSION_COOKIE_NAME = 'sessionid'  # Nom du cookie de session
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Session persiste après la fermeture du navigateur
-SESSION_COOKIE_AGE = 86400  # Durée de vie du cookie de session en secondes (ici 1 jour)
-SESSION_SAVE_EVERY_REQUEST = True  # Sauvegarder la session à chaque requête
-
-SESSION_COOKIE_SECURE = True  # Assure que le cookie de session est seulement envoyé via HTTPS
-SESSION_COOKIE_HTTPONLY = True  # Préviens l'accès aux cookies via JavaScript
 
 # Définir la clé de session pour l'utilisateur connecté
 LOGIN_REDIRECT_URL = '/accueil/'  # URL où l'utilisateur est redirigé après la connexion
@@ -129,20 +117,16 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.88.28']  # Home
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.137.195']  # Carrefour
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.88.28']  # Home
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.137.62']  # Carrefour
+# ALLOWED_HOSTS = ['192.168.137.206', 'localhost', '127.0.0.1']
+# CSRF_TRUSTED_ORIGINS = ['http://192.168.137.206', 'http://localhost', 'http://127.0.0.1']
+
 
 import pdfkit
 
 PDFKIT_CONFIG = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
 DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100 MB en octets, ajustez selon vos besoins
-
-# settings.py
-
-# settings.py
-
-
-# DATABASE_ROUTERS = ['myapp.db_router.DatabaseRouter']
 
 
 # Password validation
@@ -174,9 +158,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

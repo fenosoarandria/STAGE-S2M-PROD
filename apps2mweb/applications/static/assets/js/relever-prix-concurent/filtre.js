@@ -217,7 +217,7 @@ function applyFiltersReleveIndex() {
                         <td>${row.lib_plus_releve}</td>
                         <td>${row.dt_maj_releve}</td>
                         <td>${row.nb_article}</td>
-                        <td>${row.etat_rel} - ${row.lib_etat_rel}</td>
+                        <td>${row.lib_etat_rel}</td>
                         <td>
                             <button class="btn-params" onClick="ReinitialiseEtatReleve(event, this)" data-numero="${row.id_releve}" data-nom="${row.libelle_releve}" data-enseigne="${row.libelle_ens}" data-etat="${row.etat_rel}" data-toggle="tooltip" data-placement="top" title="Reinitialiser relevé"><i class="flaticon-gear"></i></button>
                             <button class="btn-delete" data-toggle="modal" data-target="#deleteReleveModal" data-id="${row.id_releve}" data-toggle="tooltip" data-placement="top" title="Supprimer relevé"><i class="flaticon-delete delete-icon"></i></button>
@@ -277,11 +277,18 @@ function applyFiltersArticleConcurrent() {
 
         if (data.data.length === 0) {
             const row = document.createElement('tr');
-            row.innerHTML = '<td colspan="6">Aucune donnée disponible</td>';
+            row.innerHTML = '<td colspan="7">Aucune donnée disponible</td>';
             tableBody.appendChild(row);
         } else {
             data.data.forEach(row => {
-                filteredDataArticleConcurrent = data.data;
+                const imagesHtml = row.images.length > 0 ? `
+                    <img src="${row.images[0]}" 
+                         alt="Photo de l'article" 
+                         class="img-article" 
+                         style="width: 100px; cursor: pointer;" 
+                         onclick="openImageModal('${row.images.join(",")}', '${row.lib_art_concur_rel}')">
+                ` : ''; // Afficher seulement la première image
+
                 const rowHtml = `
                     <tr>
                         <td>${row.libelle_ens}</td>
@@ -289,13 +296,7 @@ function applyFiltersArticleConcurrent() {
                         <td>${row.lib_art_concur_rel}</td>
                         <td>${row.gc_concur_rel}</td>
                         <td>${row.prix_concur_rel}</td>
-                        <td>
-                            <img src="${row.image}" 
-                                alt="Photo de l'article" 
-                                class="img-article" 
-                                style="width: 100px; cursor: pointer;" 
-                                onclick="openImageModal('${row.image}', '${row.lib_art_concur_rel}')">
-                        </td>
+                        <td>${imagesHtml}</td>
                         <td>
                             ${row.statut_rattachement == 1 
                                 ? '<span class="statut-coché">Déjà rattaché</span>' 
@@ -318,8 +319,26 @@ function applyFiltersArticleConcurrent() {
     });
 }
 
-function openImageModal(imageUrl, lib) {
-    document.getElementById('modalImage').src = imageUrl;
-    document.querySelector('#imageModal #libelle_image').innerHTML = lib;
+function openImageModal(imageUrls, lib) {
+    const imageArray = imageUrls.split(","); // Convertir en tableau d'URLs
+    // const modalBody = document.querySelector('#imageModal .modal-body');
+    const carouselImages = document.getElementById('carouselImages');
+
+    // Vider le carrousel avant d'ajouter de nouvelles images
+    carouselImages.innerHTML = ''; // Vider le carrousel
+
+    // Ajouter les images au carrousel
+    imageArray.forEach((url, index) => {
+        const isActive = index === 0 ? 'active' : ''; // Rendre la première image active
+
+        const carouselItem = document.createElement('div');
+        carouselItem.className = `carousel-item ${isActive}`;
+        carouselItem.innerHTML = `
+            <img src="${url}" alt="Image de l'article" class="d-block " style="height: auto;">
+        `;
+        carouselImages.appendChild(carouselItem);
+    });
+
+    document.querySelector('#libelle_image').innerHTML = lib; // Afficher le libelle de l'image
     $('#imageModal').modal('show');
 }

@@ -73,7 +73,6 @@ def applique_filtre_article_s2m(request):
 
 
 
-
 #-------------------------- Selecter tout les articles ----------------------
 def select_all_article(request, nomenclature):
     # Liste des colonnes acceptables pour éviter les injections SQL
@@ -93,10 +92,6 @@ def select_all_article(request, nomenclature):
         articles = [dict(zip(columns, row)) for row in rows]
 
     return articles
-
-
-
-
 
 #-------------------------- Selecter tout les articles ----------------------
 @csrf_exempt
@@ -120,9 +115,7 @@ def alimefiltermod(request, critere, filtre, mag):
             LEFT JOIN pvmag ON ra.art = pvmag.art_pv
             LEFT JOIN pvn_ref AS pf ON ra.art = pf.art_pv
             WHERE {critere} = '{filtre}' AND mag_pv = '{mag}'
-        """ 
-        print(query)
-        
+        """         
         cursor.execute(query, [filtre, mag])
         rows = cursor.fetchall()
 
@@ -160,7 +153,6 @@ def alimefiltermodimport(request, ref, mag):
 @csrf_exempt
 def ajout_article(request): 
     resultat = alimefiltermod(request, request.POST.get('critere'), request.POST.get('filtre'), request.POST.get('mag'))
-    
     if not isinstance(resultat, list):
         return JsonResponse({'data': 'Aucun article trouvé'}, safe=False)
 
@@ -178,9 +170,9 @@ def ajout_article(request):
                     zone_id = request.POST.get('zone')
                     zone_label = select_by_id_zone(request, zone_id)
                     
-                    exist = RelReleveView.check_existing_article(element.get('art'), element.get('gencod'), element.get('lib'),request.POST.get('enseigne'))
-                    if not exist:
-                        releve_data = (
+                    # exist = RelReleveView.check_existing_article(element.get('art'), element.get('gencod'), element.get('lib'),request.POST.get('enseigne'))
+                    # if not exist:
+                    releve_data = (
                             request.POST.get('num_releve'), 
                             element.get('lib'), 
                             element.get('art'), 
@@ -191,7 +183,7 @@ def ajout_article(request):
                             zone_label,
                             0, '-', 0, 0, 0
                         )
-                        data.append(releve_data)
+                    data.append(releve_data)
             
             if data:
                 RelReleveView.insertion_releve(data)
@@ -211,9 +203,11 @@ def ajout_article(request):
         manage_releve_existing('drop')
         manage_indexes_releve('drop')
         
+        return JsonResponse({'success': True, 'message': 'Article inséré avec succès'})
 
-        return JsonResponse({'data': 'Article inséré avec succès'}, safe=False)
+        # return JsonResponse({'data': 'Article inséré avec succès'}, safe=False)
     
     except Exception as e:
         print(e)  # Useful for debugging
-        return JsonResponse({'data': f'Erreur lors de l\'insertion des articles: {str(e)}'}, safe=False)
+        return JsonResponse({'danger': False, 'message': f'Erreur lors de l\'insertion des articles: {str(e)}'})
+        # return JsonResponse({'data': f'Erreur lors de l\'insertion des articles: {str(e)}'}, safe=False)

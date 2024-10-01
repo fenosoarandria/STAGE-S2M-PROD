@@ -83,8 +83,8 @@ async function uploadFileReleve() {
 }
 
 async function uploadFileRattachementS2M() {
-    const file = document.getElementById('importExcelRattachement').files[0];
-
+    const file = document.getElementById('importExcelRattachementS2M').files[0];
+    console.log(file)
     if (!file) {
         showAlert('Veuillez sélectionner un fichier.', 'danger');
         return;
@@ -100,9 +100,13 @@ async function uploadFileRattachementS2M() {
             headers: { 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value }
         });
         const data = await response.json();
-        $('#rattachementModal').modal('hide');
-        hideLoading();
-        showAlert(data.data, 'success');
+        if (data.success) {   
+            $('#rattachementModal').modal('hide');
+            hideLoading();
+            showAlert(data.message, 'success');
+        }else{
+            showAlert(data.message, 'danger');
+        }
     } catch (error) {
         showAlert(data.data, 'danger');
         hideLoading();
@@ -128,11 +132,15 @@ async function uploadFileRattachementConcurrent() {
             headers: { 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value }
         });
         const data = await response.json();
-        $('#rattachementConcurrentModal').modal('hide');
-        hideLoading();
-        showAlert(data.data, 'success');
+        if (data.success) {
+            $('#rattachementConcurrentModal').modal('hide');
+            hideLoading();
+            showAlert(data.message, 'success');
+        }else{
+            showAlert(data.message, 'danger');
+        }
     } catch (error) {
-        showAlert(data.data, 'danger');
+        showAlert(data.message, 'danger');
         hideLoading();
         console.error('Erreur lors de l\'importation:', error);
     }
@@ -165,13 +173,17 @@ async function uploadFileReleveConcurrent() {
         });
 
         const data = await response.json();
-        showAlert(data.data, 'success');
-        $('#nouveauArticleConcurrentModal').modal('hide');
-        DetailReleve(num_releve);
-        applyFiltersReleveIndex();
+        if (data.success) {
+            showAlert(data.message, 'success');
+            $('#nouveauArticleConcurrentModal').modal('hide');
+            DetailReleve(num_releve);
+            applyFiltersReleveIndex();
+        }else{
+            showAlert(data.message, 'danger');
+        }
 
     } catch (error) {
-        showAlert(data.data, 'danger');
+        showAlert(data.message, 'danger');
         console.error('Erreur lors de l\'importation:', error);
     }
 }

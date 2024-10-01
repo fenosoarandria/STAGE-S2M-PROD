@@ -3,19 +3,18 @@ function paginateTable(tableId, paginationId, rowsPerPage) {
     const pagination = document.getElementById(paginationId);
 
     if (!table || !pagination) {
-        // console.error(`Table with ID "${tableId}" or pagination with ID "${paginationId}" not found.`);
         return;
     }
 
     let currentPage = 1;
     let rows = table.querySelectorAll('tbody tr');
-    let filteredRows = Array.from(rows); // Copy of the original rows
+    let filteredRows = Array.from(rows);
 
     function displayPage(page, rowsToDisplay) {
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
-        rows.forEach(row => row.style.display = 'none'); // Hide all rows
-        rowsToDisplay.slice(start, end).forEach(row => row.style.display = ''); // Show the current page rows
+        rows.forEach(row => row.style.display = 'none'); 
+        rowsToDisplay.slice(start, end).forEach(row => row.style.display = '');
     }
 
     function setupPagination(rowsToDisplay) {
@@ -25,34 +24,17 @@ function paginateTable(tableId, paginationId, rowsPerPage) {
             console.error(`Pagination list inside "${paginationId}" not found.`);
             return;
         }
-        paginationItems.innerHTML = '<li class="page-item" id="prev-page"><a class="page-link" href="#">Précédente</a></li>';
 
-        function createPageItem(i) {
-            const pageItem = document.createElement('li');
-            pageItem.classList.add('page-item');
-            pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-            if (i === currentPage) {
-                pageItem.classList.add('active');
-            }
-            pageItem.addEventListener('click', (e) => {
-                e.preventDefault();
-                currentPage = i;
-                displayPage(currentPage, rowsToDisplay);
-                setupPagination(rowsToDisplay);
-            });
-            return pageItem;
-        }
+        // Reset the pagination content
+        paginationItems.innerHTML = '';
 
-        const startPage = Math.max(1, currentPage - 1);
-        const endPage = Math.min(totalPages, currentPage + 1);
+        // Create "Précédente" button
+        const prevPage = document.createElement('li');
+        prevPage.classList.add('page-item');
+        prevPage.innerHTML = '<a class="page-link" href="#">Précédente</a>';
+        paginationItems.appendChild(prevPage);
 
-        for (let i = startPage; i <= endPage; i++) {
-            paginationItems.appendChild(createPageItem(i));
-        }
-
-        paginationItems.innerHTML += '<li class="page-item" id="next-page"><a class="page-link" href="#">Suivante</a></li>';
-
-        pagination.querySelector('#prev-page').addEventListener('click', (e) => {
+        prevPage.addEventListener('click', (e) => {
             e.preventDefault();
             if (currentPage > 1) {
                 currentPage--;
@@ -61,7 +43,40 @@ function paginateTable(tableId, paginationId, rowsPerPage) {
             }
         });
 
-        pagination.querySelector('#next-page').addEventListener('click', (e) => {
+        // Create page numbers
+        function createPageItem(i) {
+            const pageItem = document.createElement('li');
+            pageItem.classList.add('page-item');
+            pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            if (i === currentPage) {
+                pageItem.classList.add('active');
+            }
+
+            pageItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentPage = i;
+                displayPage(currentPage, rowsToDisplay);
+                setupPagination(rowsToDisplay); // Refresh pagination to update active state
+            });
+
+            return pageItem;
+        }
+
+        // Generate page numbers
+        const startPage = Math.max(1, currentPage - 1);
+        const endPage = Math.min(totalPages, currentPage + 1);
+
+        for (let i = startPage; i <= endPage; i++) {
+            paginationItems.appendChild(createPageItem(i));
+        }
+
+        // Create "Suivante" button
+        const nextPage = document.createElement('li');
+        nextPage.classList.add('page-item');
+        nextPage.innerHTML = '<a class="page-link" href="#">Suivante</a>';
+        paginationItems.appendChild(nextPage);
+
+        nextPage.addEventListener('click', (e) => {
             e.preventDefault();
             if (currentPage < totalPages) {
                 currentPage++;
@@ -77,7 +92,7 @@ function paginateTable(tableId, paginationId, rowsPerPage) {
     return {
         update: function(newRows) {
             filteredRows = newRows;
-            currentPage = 1; // Reset to the first page
+            currentPage = 1;
             displayPage(currentPage, filteredRows);
             setupPagination(filteredRows);
         }

@@ -47,10 +47,10 @@
                             <i class="flaticon-search search-icon"></i>
                         </div>
 
-                        <!-- Bouton pour ouvrir le modal "Nouveau relevé" -->
+                        {% comment %} <!-- Bouton pour ouvrir le modal "Nouveau relevé" -->
                         <button class="btn-advanced" data-toggle="modal" onClick="Releve();" data-target="#importReleveModal" data-toggle="tooltip" data-placement="top" title="Importer relevé">
                             <i class="flaticon-download"></i>
-                        </button> 
+                        </button>  {% endcomment %}
 
                     <!-- Fin filtres de date et de sélection -->
                 </div>
@@ -265,7 +265,7 @@
 
 <!-- Modal Detail Relevé -->
 <div class="modal fade" id="detailReleveModal" tabindex="-1" role="dialog" aria-labelledby="detailReleveModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg " id="custom-modal-detail-size" role="document"> <!-- Utilisation de la classe modal-lg pour agrandir le modal -->
+    <div class="modal-dialog modal-lg" id="custom-modal-detail-size" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="detailReleveModalLabel">Detail Relevé</h5>
@@ -274,51 +274,44 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Champ de recherche dans le modal -->
                 <center><b id="libelle"></b></center>
-                
-                <div class="form-inline">                    
-                    <!-- Bouton pour ouvrir le modal "Nouveau relevé" -->
+                <div class="form-inline">
                     <button class="btn-advanced" id="import_releve" data-toggle="modal" data-target="#nouveauArticleModal" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau article">
                         <i class="flaticon-plus"></i>
                         Releve S2M
-                    </button> 
-                      
-                    <div></div>
-                    {% comment %} <button class="btn-advanced" data-placement="left" title="Export exel article">Exel</button>  {% endcomment %}
-                        <button class="btn-advanced aligned" id="import_conc" data-toggle="modal" data-target="#nouveauArticleConcurrentModal" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau article concurrent">
-                            <i class="flaticon-plus"></i>
-                            Concurrent
-                        </button>
-                    
+                    </button>
                     <div class="search-container">
                         <input type="text" id="searchDetailReleveInput" class="form-control form-control-sm" placeholder="Recherche">
                         <i class="flaticon-search search-icon"></i>
+                        <div></div>
+                        <button class="btn-advanced btn-advanced-concurrent" id="import_conc" data-toggle="modal" data-target="#nouveauArticleConcurrentModal" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau article concurrent">
+                            <i class="flaticon-plus"></i>
+                            Concurrent
+                        </button> 
                     </div>
-                    
-                    
-                    
+
                 </div>
                 <br>
-                
                 <div class="box">
                     <div class="btn-container">
                         <button onclick="exportArticleReleve()" class="export-btn export-btn-excel">
                             <i class="fas fa-file-excel"></i>
-                        </button>            
+                        </button>  
+                        {% comment %} <button onclick="generatePdfDetailReleve()" class="export-btn export-btn-pdf">
+                            <i class="fas fa-file-pdf"></i>
+                        </button>            {% endcomment %}
                     </div>
                     <br>
-
-                    <div class="table-responsive mb-4"> <!-- Ajusté le padding-bottom -->
+                    <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover" id="table-detail-releve">
                             <thead>
                                 <tr>
                                     <th style="color: black; text-align:center; background-color: #7292B2;">Référence article S2M</th>
                                     <th style="color: black; text-align:center; background-color: #7292B2;">Libellé S2M</th>
-                                    <th style="color: black; text-align:center; background-color: #7292B2;">Gencode S2M	</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Gencode S2M</th>
                                     <th style="color: black; text-align:center; background-color: #7292B2;">Prix référence</th>
                                     <th style="color: black; text-align:center; background-color: #7292B2;">Prix zone</th>
-                                    <th style="color: black; text-align:center; background-color: #7292B2;">Libellé concurrent	</th>
+                                    <th style="color: black; text-align:center; background-color: #7292B2;">Libellé concurrent</th>
                                     <th style="color: black; text-align:center; background-color: #7292B2;">Gencode concurrent</th>
                                     <th style="color: black; text-align:center; background-color: #7292B2;">Prix concurrent</th>
                                     <th style="color: black; text-align:center; background-color: #7292B2;">Commentaire</th>
@@ -327,11 +320,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- Données dynamiques -->
                             </tbody>
                         </table>
                     </div>
-                    
-                    <!-- Pagination pour le modal d'importation -->
+                    <div id="loading_detail_releve" class="loading-spinner-wrapper" style="display: none;">
+                        <div class="loading-spinner"></div>
+                    </div>
                     <nav id="pagination-detail-releve" aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
                             <li class="page-item" id="prev-page-import"><a class="page-link" href="#">Précédente</a></li>
@@ -358,7 +353,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
             <div class="modal-body">
                 <div class="form-group">
                     <label for="dateInput">Date:</label>
@@ -368,15 +362,12 @@
                     <label for="releveNumberInput">N° relevé:</label>
                     <input type="text" class="form-control form-control-sm" id="releveNumberInput" readonly>
                 </div>
-
                 <div id="modal-body-detail">
-                    <!-- Boîte S2M -->
                     <div class="box-container-detail s2m-box">
                         <div class="box-header">
                             <h5>S2M</h5>
                         </div>
                         <input type="hidden" class="form-control form-control-sm" id="id_rel_rel">
-
                         <div class="form-group">
                             <label for="s2mReference">Référence article</label>
                             <input type="text" class="form-control form-control-sm" id="s2mReference" readonly>
@@ -398,8 +389,6 @@
                             <input type="text" class="form-control form-control-sm" id="s2mZone" readonly>
                         </div>
                     </div>
-
-                    <!-- Boîte ENSEIGNE -->
                     <div class="box-container-detail concurrent-box">
                         <div class="box-header">
                             <h5 id="concurrent_info"></h5>
@@ -426,21 +415,24 @@
                             <input type="hidden" class="form-control form-control-sm" id="id_concurrent">
                         </div>
                     </div>
-
-                    <!-- Nouvelle Boîte PHOTO -->
                     <div class="box-container-detail photo-box">
                         <div class="box-header">
                             <h5>Photo de l'article</h5>
                         </div>
-                        <div class="form-group" id="conteneurImage">
+                        <div class="carousel">
+                            <div class="carousel-images">
+                                <!-- Les images seront insérées ici par JavaScript -->
+                            </div>
+                            <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+                            <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
                         </div>
                     </div>
+                    
                 </div>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                <button type="button" id="modifier_releve" class="btn btn-primary" onClick="UpdateInformationArticleConcurrent()">Modifier</button>
+                <button type="button" class="btn btn-primary" id="saveChangesBtn" onClick="saveChanges()">Enregistrer les modifications</button>
             </div>
         </div>
     </div>
@@ -469,7 +461,7 @@
                 <input type="hidden" id="hiddenNum">
                 <input type="hidden" id="hiddenEtat">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                <button type="button" class="btn btn-primary" onClick="ConfirmUpdateEtatReleve()">Oui</button>
+                <button type="button" class="btn btn-danger" onClick="ConfirmUpdateEtatReleve()">Oui</button>
             </div>
         </div>
     </div>
@@ -523,6 +515,7 @@
                             <span class="star"></span>
                             <span class="star"></span>
                         </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="button" class="btn btn-primary" onClick="InsertArticleReleve()">Valider</button>
                     </div>
                 </div>
@@ -548,6 +541,7 @@
                                 <input type="file" name="importExcelReleve" id="importExcelReleve" accept=".xls,.xlsx,.csv" required>
                             </div>
                             <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                 <button type="button" class="btn btn-primary" onclick="uploadFileReleve()">Importer</button>
                             </div>
                         </form>
@@ -589,9 +583,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-
-            <button type="button" class="btn btn-primary" onclick="uploadFileReleveConcurrent()">Valider</button>
-            
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" onclick="uploadFileReleveConcurrent()">Valider</button>
             </div>
         </div>
     </div>

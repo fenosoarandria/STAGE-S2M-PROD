@@ -1,0 +1,792 @@
+/* Conteneur principal */
+.container-fluid {
+    padding: 0 15px;
+}
+
+/* En-tête */
+.header {
+    background-color: #3232b7;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.header h3 {
+    margin: 0;
+}
+
+/* Box */
+/* .box {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(84, 70, 70, 0.123);
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px; 
+    height: 100%;
+} */
+
+/* Boutons */
+.btn-params{
+    background-color: grey;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+.btn-params:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+.btn-delete{
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+.btn-delete:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+.btn-advanced {
+    background: linear-gradient(135deg, #3232b7, #50e3c2);
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 03px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    height: 33px;
+    margin-top: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+
+}
+
+.btn-advanced:hover {
+    background: linear-gradient(135deg, #50e3c2, #4a90e2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.btn-advanced:focus {
+    outline: none;
+}
+/* Pour le bouton concurrent, il sera superposé au-dessus de l'autre bouton */
+.btn-advanced-concurrent {
+    background: linear-gradient(135deg, #3232b7, #50e3c2);
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 3px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    height: 33px;
+    position: absolute; /* Positionnement absolu pour la superposition */
+    top: 40px; /* Ajuster la position selon tes besoins */
+    left: 105px; /* Ajuster la position selon tes besoins */
+    z-index: 10; /* Assure que ce bouton se trouve au-dessus */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-advanced-concurrent:hover {
+    background: linear-gradient(135deg, #ff0000, #50e3c2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.btn-advanced-concurrent:focus {
+    outline: none;
+}
+
+/* Formulaire */
+.form-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.form-inline .form-control {
+    margin: 0 5px;
+}
+
+.form-control-sm {
+    height: 30px;
+    font-size: 14px;
+}
+#endDate,
+#startDate,
+#select,
+#enseigne,
+#zone,
+#dateInsertion{
+    color: black;
+    height: 40px;
+}
+
+/* Conteneur de recherche */
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-container input {
+    padding-left: 35px; /* Ajusté pour l'icône de recherche */
+}
+
+.search-container .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #007bff;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.table th, .table td {
+    padding: 12px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 85%;
+}
+
+.table thead th {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Pagination */
+.pagination {
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.page-item {
+    display: inline;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    text-align: center;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-link:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+/* Style pour la partie gauche */
+.left-part {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+#head{
+    color: black;
+    font-weight: bold
+    ;
+}
+
+/* Style pour le bouton de pagination actif */
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* Couleur de fond du bouton actif */
+    border-color: #007bff; /* Couleur de bord du bouton actif */
+    color: white; /* Couleur du texte du bouton actif */
+}
+
+/* Style pour les boutons de pagination */
+.pagination .page-link {
+    color: #007bff; /* Couleur du texte des boutons de pagination */
+}
+
+
+/* Exception */
+.alert-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 300px;
+    /* Alignement des notifications au centre du conteneur */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    opacity: 0; /* Initialement caché */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    background-color: #fff; /* Couleur de fond par défaut */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre portée pour un effet de profondeur */
+}
+
+.alert-show {
+    opacity: 1;
+    transform: translateY(0); /* Affichage de l'alerte */
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.alert-icon {
+    font-size: 20px; /* Taille de l'icône */
+    margin-right: 15px; /* Espacement entre l'icône et le message */
+    flex-shrink: 0; /* Évite que l'icône se réduise */
+}
+
+.alert-message {
+    flex: 1; /* Le message prend l'espace restant */
+}
+
+.alert-close {
+    font-size: 18px; /* Taille du bouton de fermeture */
+    margin-left: 15px; /* Espacement entre le message et le bouton de fermeture */
+    cursor: pointer; /* Changer le curseur pour indiquer que c'est cliquable */
+    color: #888; /* Couleur du bouton de fermeture */
+    transition: color 0.3s; /* Transition de couleur pour le bouton de fermeture */
+}
+
+.alert-close:hover {
+    color: #333; /* Couleur du bouton de fermeture au survol */
+}
+/* modal */
+
+
+.modal-header{
+    background-color:  #007bff; /* Couleur de fond bleue */
+    color: white;
+}
+.modal-title{
+    font-weight: bold;
+}
+/* Détail relevé */
+#custom-modal-detail-size {
+    max-width: 90%; /* Ajustez cette valeur selon vos besoins */
+}
+
+#custom-modal-detail-size table th, 
+#custom-modal-detail-size table td {
+    padding: 12px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 70%;
+}
+
+#custom-modal-detail-modif-size {
+    max-width: 80%; /* Réduction de la largeur de la boîte principale */
+    height: auto;
+    margin-top: 30px; /* Décale la boîte vers le bas */
+}
+
+#modal-body-detail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.modal-title {
+    font-weight: bold; /* Mettre le texte en gras */
+    text-align: center; /* Centrer le texte */
+    width: 100%; /* S'assurer que l'élément prend toute la largeur disponible */
+    margin: 0; /* Supprimer la marge par défaut */
+}
+.modal-body img {
+    max-width: 100%;
+    max-height: 70vh; /* Limite la hauteur maximale de l'image dans le modal */
+    object-fit: contain; /* Maintient les proportions de l'image */
+}
+
+/* Style des boîtes internes */
+.box-container-detail {
+    border: 1px solid #ddd;
+    padding: 10px; /* Réduction du padding pour minimiser la taille */
+    margin-bottom: 10px; /* Réduction de l'espace entre les boîtes */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    width: 30%; /* Réduction de la largeur des boîtes internes */
+    position: relative;
+    font-size: 9px; /* Réduction de la taille de la police pour minimiser les boîtes */
+}
+
+.box-container-detail h5 {
+    margin-top: 0;
+    font-size: 11px; /* Réduction de la taille de la police pour les titres */
+}
+
+.box-header {
+    background-color: #3232b7;
+    color: #fff; /* Couleur du texte */
+    padding: 8px; /* Réduction du padding */
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 10px; /* Réduction de l'espace sous le titre */
+}
+
+/* Couleurs spécifiques pour les boîtes */
+.s2m-box .box-header {
+    background-color: #3232b7;
+}
+
+.concurrent-box .box-header {
+    background-color: #12d9fc;
+}
+
+.photo-box .box-header {
+    background-color: #f39c12; /* Couleur de fond spécifique pour la boîte photo */
+}
+
+/* Styles spécifiques pour la boîte photo */
+.photo-box img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Centrer le texte des en-têtes dans les boîtes */
+.box-header h5 {
+    text-align: center; /* Centrer le texte */
+    margin: 0; /* Supprimer la marge par défaut */
+}
+
+/* Style du spinner */
+/* Not important */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1); /* Couleur de l'anneau externe */
+    border-top-color: #05090c; /* Couleur de l'anneau interne (rotation) */
+    border-radius: 50%; /* Cercle */
+    animation: spin 0.75s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; /* Animation plus rapide et fluide */
+    position: absolute; /* Position absolue à l'intérieur du conteneur parent */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform; /* Optimisation pour le navigateur */
+    display: none; /* Masqué par défaut */
+}
+
+
+
+
+/*Loading etoile */
+/* Styles pour le conteneur de l'animation de chargement */
+#loading-indicator {
+    display: flex;
+    justify-content: center; /* Centre horizontalement les étoiles */
+    align-items: center; /* Centre verticalement les étoiles */
+    position: relative; /* Assure que le conteneur peut être positionné relativement */
+}
+
+#loading-indicator .star {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    background: gray;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    opacity: 0.5;
+    animation: fillStar 3s infinite ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+#loading-indicator .star:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+#loading-indicator .star:nth-child(2) {
+    animation-delay: 1s;
+}
+
+#loading-indicator .star:nth-child(3) {
+    animation-delay: 1.5s;
+}
+
+#loading-indicator .star:nth-child(4) {
+    animation-delay: 2s;
+}
+
+#loading-indicator .star:nth-child(5) {
+    animation-delay: 2.5s;
+}
+
+#loading-indicator .star:nth-child(6) {
+    animation-delay: 3s;
+}
+
+
+
+/* Style général du conteneur de chargement */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150%; /* Hauteur du conteneur parent pour couvrir toute la table */
+    position: absolute; /* Positionner de manière absolue pour le centrage */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0); /* Fond transparent */
+    z-index: 1; /* Assurez-vous que le spinner est au-dessus du contenu sans le bloquer */
+    pointer-events: none; /* Permet aux interactions de passer à travers le conteneur */
+}
+
+/* Style général du spinner rang */
+.loading-spinner-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Masqué par défaut */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Au-dessus du reste du contenu */
+    width: 100%; 
+    height: 100%; 
+}
+
+.loading-spinner {
+    border: 8px solid #f3f3f3; /* Couleur de fond */
+    border-radius: 50%;
+    border-top: 8px solid #3498db; /* Couleur de l'animation */
+    width: 50px; /* Taille du spinner */
+    height: 50px; /* Taille du spinner */
+    animation: spin 1s linear infinite; /* Animation */
+}
+
+/* Animation pour faire tourner le spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Section toggle links */
+.toggle-link-releve {
+    text-decoration: none;
+    /* color:#3232b7; */
+    padding: 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+}
+
+.toggle-link-releve.active {
+    background-color:#007bff;
+    color: white;
+    box-shadow: 0 4px 6px rgba(12, 56, 136, 0.2);
+}
+
+.toggle-link-releve:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-container {
+    display: flex; /* Aligner les boutons horizontalement */
+    gap: 10px; /* Espacement entre les boutons */
+    align-items: center; /* Aligner les boutons verticalement */
+}
+
+/* Export */
+
+.export-btn {
+    color: #ffffff; /* Couleur du texte (icône) */
+    border: none; /* Supprimer les bordures du bouton */
+    padding: 8px 12px; /* Réduit l'espacement interne pour un bouton plus petit */
+    cursor: pointer; /* Curseur en forme de main */
+    display: flex; /* Utiliser Flexbox pour centrer l'image */
+    align-items: center; /* Aligner verticalement l'icône */
+    justify-content: center; /* Centrer horizontalement l'icône */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Ombre interne pour l'effet concave */
+    transition: all 0.3s ease; /* Transition douce pour les effets */
+}
+
+.export-btn:hover {
+    transform: scale(1.05); /* Agrandir légèrement le bouton au survol */
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4); /* Ombre interne plus prononcée au survol */
+}
+
+.export-btn:active {
+    transform: scale(0.95); /* Réduit légèrement le bouton au clic */
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3); /* Ombre interne réduite au clic */
+}
+
+/* Personnalisation des couleurs pour chaque bouton */
+.export-btn-excel {
+    background-color: #4caf50; /* Couleur de fond pour le bouton Excel */
+}
+
+.export-btn-pdf {
+    background-color: #f44336; /* Couleur de fond pour le bouton PDF */
+}
+
+.export-btn-excel:hover {
+    background-color: #45a049; /* Couleur de fond au survol pour le bouton Excel */
+}
+
+.export-btn-pdf:hover {
+    background-color: #e53935; /* Couleur de fond au survol pour le bouton PDF */
+}
+
+
+/* Uniformiser la taille des images dans le tableau */
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide_releve {
+    min-width: 100%;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.slide_releve.active {
+    opacity: 1;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.img-article {
+    width: 100px; /* Ajuster la largeur souhaitée */
+    height: 75px; /* Ajuster la hauteur souhaitée */
+    object-fit: cover; /* Ajuste la taille de l'image tout en conservant ses proportions */
+    cursor: pointer; /* Pointeur de souris pour l'image cliquable */
+}
+
+.img-article:hover {
+    transform: scale(1.2); /* Agrandir l'image légèrement au survol */
+}
+
+.image-error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.statut-coché {
+    color: rgb(0, 255, 0); /* Couleur pour le texte coché */
+    font-weight: bold; /* Mettre le texte en gras */
+}
+
+.statut-coché::before {
+    content: '✔'; /* Ajoute une coche avant le texte */
+    color: rgb(0, 255, 0); /* Couleur de la coche */
+    margin-right: 5px; /* Espace entre la coche et le texte */
+}
+
+
+@keyframes fillStar {
+    0% {
+        background: rgb(0, 255, 76);
+        opacity: 0.5;
+    }
+    100% {
+        background: rgb(0, 42, 255);
+        opacity: 1;
+    }
+}
+
+/* Animation plus fluide avec cubic-bezier */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* Responsive */
+@media (max-width: 1300px) {
+    .form-inline {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .form-inline .form-control {
+        margin: 0 0 10px 0;
+        width: 100%;
+    }
+    .custom-select {
+        border: 1px solid #dddddd !important;
+        padding: 10px !important;
+        font-size: 16px !important;
+        width: 100% !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .search-container {
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .btn-advanced {
+        width: 100%;
+    }
+    .btn-advanced-concurrent {
+        width: 17%;
+        left: 82%; /* Ajuster la position selon tes besoins */
+    }
+}
+@media (max-width: 991px) {
+    #head {
+        margin-top: 1cm;
+    }
+    .form-inline {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .form-inline .form-control {
+        margin: 0 0 10px 0;
+        width: 100%;
+    }
+
+    .search-container {
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .btn-advanced {
+        width: 100%;
+    }
+    .btn-advanced-concurrent {
+        width: 17%;
+        left: 82%; /* Ajuster la position selon tes besoins */
+    }
+    #modal-body-detail {
+        flex-direction: column; /* Alignement vertical pour les petits écrans */
+    }
+
+    .box-container-detail {
+        width: 100%; /* Les boîtes prennent toute la largeur sur les petits écrans */
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 839px) {
+    #head {
+        margin-top: 10%;
+        font-size: 25px;
+        font-weight: bold;
+        color: black;
+    }
+    .loading-spinner {
+        width: 30px;
+        height: 30px;
+    }
+    .btn-advanced-concurrent {
+        width: 29%;
+        left: 71%; /* Ajuster la position selon tes besoins */
+    }
+}
+@media (max-width: 580px) {
+    #head {
+        margin-top: 30%;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+    }
+    .toggle-link-releve {
+        padding: 6px; /* Réduit encore le padding pour les écrans très petits */
+        font-size: 12px; /* Réduit la taille de la police pour les très petits écrans */
+    }
+    .btn-advanced-concurrent {
+        width: 42%;
+        left: 58%; /* Ajuster la position selon tes besoins */
+    }
+
+}
+

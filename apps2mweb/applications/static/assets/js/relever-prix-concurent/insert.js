@@ -248,11 +248,15 @@ function InsertArticleReleve() {
     })
     .then(response => response.ok ? response.json() : Promise.reject('Erreur réseau'))
     .then(data => {
-        showAlert(data.data, 'success');
-        $('#nouveauArticleModal').modal('hide');
-        DetailReleve(num_releve);
-        applyFiltersReleveIndex();
-        hideLoading();
+        if(data.success){
+            showAlert(data.message, 'success');
+            $('#nouveauArticleModal').modal('hide');
+            DetailReleve(num_releve);
+            applyFiltersReleveIndex();
+            hideLoading();
+        }else{
+            showAlert(data.message, 'danger');
+        }
     })
     .catch(error => {
         console.error('Erreur:', error);

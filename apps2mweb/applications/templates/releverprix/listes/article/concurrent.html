@@ -10,7 +10,7 @@
             <div class="form-inline">
                 <button class="btn-advanced" data-toggle="modal" data-target="#rattachementConcurrentModal" data-toggle="tooltip" data-placement="top" title="Rattachement article">
                     <i class="flaticon-up-arrow-2"></i>
-                    Exel
+                    Rattaché S2M
                 </button> 
                 <form id="filter-form" class="form-inline" method="post">
                     {% csrf_token %}
@@ -109,13 +109,12 @@
                 </ul>
                 <div class="form-group">
                     <label for="file-input">Choisir un fichier :</label>
-                    <input type="file" id="importExcelRattachement" name="importExcelRattachementConcurrent" class="form-control" accept=".xlsx, .xls">
+                    <input type="file" id="importExcelRattachementConcurrent" name="importExcelRattachementConcurrent" class="form-control" accept=".xlsx, .xls">
                 </div>
             </div>
             <div class="modal-footer">
-
-            <button type="button" class="btn btn-primary" onclick="uploadFileRattachementS2M()">Valider</button>
-            
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" onclick="uploadFileRattachementConcurrent()">Valider</button>
             </div>
         </div>
     </div>
@@ -125,22 +124,35 @@
 <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="imageModalLabel">Image de l'article</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <h6 class="modal-title" id="libelle_image"></h6>
-            <img id="modalImage" src="" alt="Image de l'article" class="img-fluid">
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Images de l'article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6 class="modal-title" id="libelle_image"></h6>
+                <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" id="carouselImages">
+                        <!-- Les images seront insérées ici -->
+                    </div>
+                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Précédent</span>
+                    </a>
+                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Suivant</span>
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
         </div>
     </div>
 </div>
+
   <!-- Modal Rattachement S2M  -->
 <div class="modal fade" id="rattachementS2mModal" tabindex="-1" role="dialog" aria-labelledby="rattachementS2mModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
